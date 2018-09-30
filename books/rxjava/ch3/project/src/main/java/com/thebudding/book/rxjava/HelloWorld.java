@@ -10,8 +10,10 @@ public class HelloWorld {
     ExOperator.flatMapNonSequential();
     System.out.println("==============\n\n");
 
-    Thread.sleep(5000);
+    ExOperator.concatMap();
+    System.out.println("==============\n\n");
 
+    Thread.sleep(5000);
   }
 
 

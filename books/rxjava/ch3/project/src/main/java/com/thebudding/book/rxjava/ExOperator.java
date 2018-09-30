@@ -33,4 +33,13 @@ public class ExOperator {
         return Observable.empty();
     }
   }
+
+  public static void concatMap() {
+    Observable.just(DayOfWeek.SUNDAY, DayOfWeek.MONDAY)
+        .concatMap(ExOperator::loadRecordsFor)
+        .subscribe(
+            i -> {
+              System.out.println(Thread.currentThread().getName() + " - " + i);
+            });
+  }
 }
