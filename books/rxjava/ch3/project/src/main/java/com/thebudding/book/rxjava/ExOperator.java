@@ -42,4 +42,15 @@ public class ExOperator {
               System.out.println(Thread.currentThread().getName() + " - " + i);
             });
   }
+
+  public static void zipUncombined() {
+    Observable<Long> red = Observable.interval(10, TimeUnit.MILLISECONDS);
+    Observable<Long> green = Observable.interval(11, TimeUnit.MILLISECONDS);
+
+    Observable.zip(
+        red.timestamp(),
+        green.timestamp(),
+        (r, g) -> r.getTimestampMillis() - g.getTimestampMillis()
+    ).forEach(System.out::println);
+  }
 }

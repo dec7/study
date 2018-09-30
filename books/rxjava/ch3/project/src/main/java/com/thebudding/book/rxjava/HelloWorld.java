@@ -3,7 +3,7 @@ package com.thebudding.book.rxjava;
 public class HelloWorld {
 
   public static void main(String[] args) throws Exception {
-
+/*
     ExOperator.flatMapNonSequentialInfinity();
     System.out.println("==============\n\n");
 
@@ -11,6 +11,9 @@ public class HelloWorld {
     System.out.println("==============\n\n");
 
     ExOperator.concatMap();
+    System.out.println("==============\n\n");
+*/
+    ExOperator.zipUncombined();
     System.out.println("==============\n\n");
 
     Thread.sleep(5000);
