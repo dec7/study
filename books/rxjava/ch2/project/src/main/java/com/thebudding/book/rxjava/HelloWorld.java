@@ -18,6 +18,12 @@ public class HelloWorld {
 
     ExObservable.publishToAll();
     System.out.println("==============\n\n");
+
+    //ExObservable.infiniteStream();
+    System.out.println("==============\n\n");
+
+    ExObservable.processError();
+    System.out.println("==============\n\n");
   }
 
 
