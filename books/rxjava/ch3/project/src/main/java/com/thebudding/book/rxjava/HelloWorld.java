@@ -15,8 +15,12 @@ public class HelloWorld {
 
     ExOperator.zipUncombined();
     System.out.println("==============\n\n");
-*/
+
     ExOperator.combineLatest();
+*/
+//    ExOperator.withLatestFrom();
+//    System.out.println("==============\n\n");
+    ExOperator.withLatestFromWithDelay();
 
     Thread.sleep(5000);
   }

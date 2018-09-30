@@ -48,19 +48,34 @@ public class ExOperator {
     Observable<Long> green = Observable.interval(11, TimeUnit.MILLISECONDS);
 
     Observable.zip(
-        red.timestamp(),
-        green.timestamp(),
-        (r, g) -> r.getTimestampMillis() - g.getTimestampMillis()
-    ).forEach(System.out::println);
+            red.timestamp(),
+            green.timestamp(),
+            (r, g) -> r.getTimestampMillis() - g.getTimestampMillis())
+        .forEach(System.out::println);
   }
 
   public static void combineLatest() {
 
     Observable.combineLatest(
-        Observable.interval(17, TimeUnit.MILLISECONDS).map(x -> "S"+x),
-        Observable.interval(10, TimeUnit.MILLISECONDS).map(x -> "F"+x),
-        (s,f) -> f + ":" + s)
+            Observable.interval(17, TimeUnit.MILLISECONDS).map(x -> "S" + x),
+            Observable.interval(10, TimeUnit.MILLISECONDS).map(x -> "F" + x),
+            (s, f) -> f + ":" + s)
         .forEach(System.out::println);
+  }
 
+  public static void withLatestFrom() {
+    Observable<String> fast = Observable.interval(10, TimeUnit.MILLISECONDS).map(x -> "F" + x);
+    Observable<String> slow = Observable.interval(17, TimeUnit.MILLISECONDS).map(x -> "S" + x);
+    slow.withLatestFrom(fast, (s, f) -> s + ":" + f).forEach(System.out::println);
+  }
+
+  public static void withLatestFromWithDelay() {
+    Observable<String> fast =
+        Observable.interval(10, TimeUnit.MILLISECONDS)
+            .map(x -> "F" + x)
+            .delay(100, TimeUnit.MILLISECONDS)
+            .startWith("FX");
+    Observable<String> slow = Observable.interval(17, TimeUnit.MILLISECONDS).map(x -> "S" + x);
+    slow.withLatestFrom(fast, (s, f) -> s + ":" + f).forEach(System.out::println);
   }
 }
