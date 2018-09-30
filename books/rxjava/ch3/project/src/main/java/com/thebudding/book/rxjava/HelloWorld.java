@@ -17,10 +17,12 @@ public class HelloWorld {
     System.out.println("==============\n\n");
 
     ExOperator.combineLatest();
-*/
+
 //    ExOperator.withLatestFrom();
 //    System.out.println("==============\n\n");
     ExOperator.withLatestFromWithDelay();
+*/
+    ExOperator.amb();
 
     Thread.sleep(5000);
   }

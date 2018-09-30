@@ -78,4 +78,15 @@ public class ExOperator {
     Observable<String> slow = Observable.interval(17, TimeUnit.MILLISECONDS).map(x -> "S" + x);
     slow.withLatestFrom(fast, (s, f) -> s + ":" + f).forEach(System.out::println);
   }
+
+  public static void amb() {
+    Observable.amb(stream(100, 17, "S"), stream(200, 10, "F")).subscribe(System.out::println);
+  }
+
+  private static Observable<String> stream(int initialDelay, int interval, String name) {
+    return Observable.interval(initialDelay, interval, TimeUnit.MILLISECONDS)
+        .map(x -> name + x)
+        .doOnSubscribe(() -> System.out.println("Subscribe to " + name))
+        .doOnUnsubscribe(() -> System.out.println("UnSubscribe to " + name));
+  }
 }
