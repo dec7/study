@@ -53,4 +53,14 @@ public class ExOperator {
         (r, g) -> r.getTimestampMillis() - g.getTimestampMillis()
     ).forEach(System.out::println);
   }
+
+  public static void combineLatest() {
+
+    Observable.combineLatest(
+        Observable.interval(17, TimeUnit.MILLISECONDS).map(x -> "S"+x),
+        Observable.interval(10, TimeUnit.MILLISECONDS).map(x -> "F"+x),
+        (s,f) -> f + ":" + s)
+        .forEach(System.out::println);
+
+  }
 }

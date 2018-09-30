@@ -12,9 +12,11 @@ public class HelloWorld {
 
     ExOperator.concatMap();
     System.out.println("==============\n\n");
-*/
+
     ExOperator.zipUncombined();
     System.out.println("==============\n\n");
+*/
+    ExOperator.combineLatest();
 
     Thread.sleep(5000);
   }
