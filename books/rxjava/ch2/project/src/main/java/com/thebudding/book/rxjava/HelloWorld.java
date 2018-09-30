@@ -13,7 +13,11 @@ public class HelloWorld {
 
 
     ExObservable.createAdvanced();
+    System.out.println("==============\n\n");
 
+
+    ExObservable.publishToAll();
+    System.out.println("==============\n\n");
   }
 
 

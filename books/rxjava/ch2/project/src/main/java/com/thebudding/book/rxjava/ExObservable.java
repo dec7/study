@@ -40,4 +40,28 @@ public class ExObservable {
     ints.subscribe(i -> log("Element: " + i));
     log("Exit");
   }
+
+  public static void publishToAll() {
+    Observable<Integer> ints = Observable.create(s -> {
+      log("Create");
+      s.onNext(42);
+      s.onCompleted();
+    });
+    log("Starting");
+    ints.subscribe(i -> log("Elements A: " + i));
+    ints.subscribe(i -> log("Elements B: " + i));
+    log("Exit");
+
+    System.out.println("=======");
+    // cached
+    Observable<Object> intsCached = Observable.create(s -> {
+      log("Create");
+      s.onNext(42);
+      s.onCompleted();
+    }).cache();
+    log("Starting");
+    intsCached.subscribe(i -> log("Elements A: " + i + ", Cached Ref: " + System.identityHashCode(i)));
+    intsCached.subscribe(i -> log("Elements B: " + i + ", Cached Ref: " + System.identityHashCode(i)));
+    log("Exit");
+  }
 }
