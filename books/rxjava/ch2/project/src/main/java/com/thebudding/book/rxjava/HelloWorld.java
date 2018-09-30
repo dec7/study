@@ -2,7 +2,7 @@ package com.thebudding.book.rxjava;
 
 public class HelloWorld {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
 
     ExObservable.method();
     System.out.println("==============\n\n");
@@ -24,6 +24,11 @@ public class HelloWorld {
 
     ExObservable.processError();
     System.out.println("==============\n\n");
+
+    ExObservable.timer();
+    System.out.println("==============\n\n");
+
+    Thread.sleep(12000);
   }
 
 

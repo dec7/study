@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import rx.Observable;
 import rx.subscriptions.Subscriptions;
@@ -182,5 +183,11 @@ public class ExObservable {
           System.out.println("Exec fn");
           return "data";
     });
+  }
+
+  public static void timer() {
+    Observable.timer(1, TimeUnit.SECONDS).subscribe((n) -> log(n));
+    System.out.println("======");
+    Observable.interval(1_000, TimeUnit.MILLISECONDS).subscribe((n) -> log(n));
   }
 }
