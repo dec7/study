@@ -1,7 +1,7 @@
 package com.thebudding.book.rxjava.dao;
 
 import com.thebudding.book.rxjava.dto.Person;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PersonDao {
@@ -11,7 +11,9 @@ public class PersonDao {
   }
 
   private List<Person> query(String query) {
-    return new ArrayList<>();
+    return Arrays.asList(
+        new Person("alice"),
+        new Person("bob"),
+        new Person("charles"));
   }
-
 }
