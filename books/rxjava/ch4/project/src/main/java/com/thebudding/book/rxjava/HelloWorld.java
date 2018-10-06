@@ -10,6 +10,8 @@ public class HelloWorld {
 
     ExApplication.blockingObservable();
 
+    ExApplication.lazyCollectionToObservable();
+
 
   }
 }

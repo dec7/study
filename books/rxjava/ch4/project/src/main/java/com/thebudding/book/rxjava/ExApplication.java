@@ -13,6 +13,7 @@ public class ExApplication {
   public static void collectionToObservable() {
     List<Person> list = personDao.listPeople();
     Observable.from(list).subscribe(System.out::println);
+    System.out.println("==========\n\n");
   }
 
   public static void blockingObservable() {
@@ -21,5 +22,11 @@ public class ExApplication {
     BlockingObservable<List<Person>> peopleBlocking = peopleList.toBlocking();
     List<Person> people = peopleBlocking.single();
     people.forEach(System.out::println);
+    System.out.println("==========\n\n");
+  }
+
+  public static void lazyCollectionToObservable() {
+    Observable.defer(() -> Observable.from(personDao.listPeople())).subscribe(System.out::println);
+    System.out.println("==========\n\n");
   }
 }
