@@ -1,31 +1,43 @@
 package com.thebudding.book.rxjava;
 
+import rx.Observable;
+
 public class HelloWorld {
 
   public static void main(String[] args) throws Exception {
-/*
-    ExOperator.flatMapNonSequentialInfinity();
+    /*
+        ExOperator.flatMapNonSequentialInfinity();
+        System.out.println("==============\n\n");
+
+        ExOperator.flatMapNonSequential();
+        System.out.println("==============\n\n");
+
+        ExOperator.concatMap();
+        System.out.println("==============\n\n");
+
+        ExOperator.zipUncombined();
+        System.out.println("==============\n\n");
+
+        ExOperator.combineLatest();
+
+    //    ExOperator.withLatestFrom();
+    //    System.out.println("==============\n\n");
+        ExOperator.withLatestFromWithDelay();
+
+        ExOperator.amb();
+
+        ExOperatorAdvanced.scan();
+
+    ExOperatorAdvanced.concatenate();
     System.out.println("==============\n\n");
 
-    ExOperator.flatMapNonSequential();
-    System.out.println("==============\n\n");
+    ExOperatorAdvanced.concatenateWithMerge();
 
-    ExOperator.concatMap();
-    System.out.println("==============\n\n");
-
-    ExOperator.zipUncombined();
-    System.out.println("==============\n\n");
-
-    ExOperator.combineLatest();
-
-//    ExOperator.withLatestFrom();
-//    System.out.println("==============\n\n");
-    ExOperator.withLatestFromWithDelay();
+    ExOperatorAdvanced.concatenateWithConcat();
 */
-    ExOperator.amb();
+    ExOperatorAdvanced.concatenateWithSwitchOnNext();
 
-    Thread.sleep(5000);
+
+    Thread.sleep(10000);
   }
-
-
 }
