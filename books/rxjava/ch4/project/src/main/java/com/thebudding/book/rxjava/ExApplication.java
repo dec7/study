@@ -3,11 +3,15 @@ package com.thebudding.book.rxjava;
 import static rx.Observable.defer;
 import static rx.Observable.from;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.thebudding.book.rxjava.dao.PersonDao;
 import com.thebudding.book.rxjava.dto.Book;
 import com.thebudding.book.rxjava.dto.Person;
 import java.util.List;
-import javax.print.attribute.standard.JobStateReason;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import rx.Observable;
 import rx.Scheduler;
 import rx.observables.BlockingObservable;
@@ -16,6 +20,13 @@ import rx.schedulers.Schedulers;
 public class ExApplication {
 
   private static long START_TIME = 0;
+
+  private static final Scheduler schedulerA = Schedulers.from(
+      Executors.newFixedThreadPool(10, threadFactory("Sched-A-%d")));
+  private static final Scheduler schedulerB = Schedulers.from(
+      Executors.newFixedThreadPool(10, threadFactory("Sched-B-%d")));
+  private static final Scheduler schedulerC = Schedulers.from(
+      Executors.newFixedThreadPool(10, threadFactory("Sched-C-%d")));
 
   private static final PersonDao personDao = new PersonDao();
 
@@ -141,7 +152,7 @@ public class ExApplication {
 
 
   public static void declarativeSubscription() {
-    long elapsedTime = System.currentTimeMillis() - START_TIME;
+    START_TIME = System.currentTimeMillis();
 
     // simple case
     System.out.println("Simple Case");
@@ -171,5 +182,94 @@ public class ExApplication {
             Throwable::printStackTrace,
             () -> log("Completed"));
     log("Exiting");
+  }
+
+  private static ThreadFactory threadFactory(String pattern) {
+    return new ThreadFactoryBuilder().setNameFormat(pattern).build();
+  }
+
+  public static void declarativeObservationSimple() {
+    START_TIME = System.currentTimeMillis();
+
+    log("Starting");
+    final Observable<String> obs = simple();
+    log("Created");
+    obs
+        .doOnNext(x -> log("Found 1: " + x))
+        .observeOn(schedulerA)
+        .doOnNext(x -> log("Found 2: " + x))
+        .subscribe(
+            x -> log("Got " + x),
+            Throwable::printStackTrace,
+            () -> log("Completed")
+        );
+    sleep(1000L);
+    log("Exiting");
+    System.out.println("==========\n\n");
+  }
+
+  public static void declarativeObservation() {
+    START_TIME = System.currentTimeMillis();
+
+    log("Starting");
+    final Observable<String> obs = simple();
+    log("Created");
+    obs
+        .doOnNext(x -> log("Found 1: " + x))
+        .observeOn(schedulerB)
+        .doOnNext(x -> log("Found 2: " + x))
+        .observeOn(schedulerC)
+        .doOnNext(x -> log("Found 3: " + x))
+        .subscribeOn(schedulerA)
+        .subscribe(
+            x -> log("Got " + x),
+            Throwable::printStackTrace,
+            () -> log("Completed")
+        );
+    sleep(1000L);
+    log("Exiting");
+    System.out.println("==========\n\n");
+  }
+
+  private static void sleep(long millis) {
+    try {
+      Thread.sleep(millis);
+    } catch (Exception e) {
+      System.exit(1);
+    }
+  }
+
+  public static void schedulerAdvanced() {
+    log("Starting");
+    Observable<String> obs = Observable.create(subscriber -> {
+      log("Subscribed");
+      subscriber.onNext("A");
+      subscriber.onNext("B");
+      subscriber.onNext("C");
+      subscriber.onNext("D");
+      subscriber.onCompleted();
+    });
+    log("Created");
+    obs
+        .subscribeOn(schedulerA)
+        .flatMap(record -> store(record).subscribeOn(schedulerB))
+        .observeOn(schedulerC)
+        .subscribe(
+            x -> log("Got " + x),
+            Throwable::printStackTrace,
+            () -> log("Completed")
+        );
+    sleep(1000L);
+    log("Exiting");
+    System.out.println("==========\n\n");
+  }
+
+  private static Observable<UUID> store(String record) {
+    return Observable.create(subscriber -> {
+      log("Storing " + record);
+      // do hard work
+      subscriber.onNext(UUID.randomUUID());
+      subscriber.onCompleted();
+    });
   }
 }

@@ -15,8 +15,13 @@ public class HelloWorld {
 
     ExApplication.trampolineScheduler();
 
-    */
     ExApplication.declarativeSubscription();
+    */
+    ExApplication.declarativeObservationSimple();
+
+    ExApplication.declarativeObservation();
+
+    ExApplication.schedulerAdvanced();
 
 
   }
