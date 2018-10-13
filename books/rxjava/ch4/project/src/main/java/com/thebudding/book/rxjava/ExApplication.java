@@ -8,9 +8,13 @@ import com.thebudding.book.rxjava.dto.Book;
 import com.thebudding.book.rxjava.dto.Person;
 import java.util.List;
 import rx.Observable;
+import rx.Scheduler;
 import rx.observables.BlockingObservable;
+import rx.schedulers.Schedulers;
 
 public class ExApplication {
+
+  private static long START_TIME = 0;
 
   private static final PersonDao personDao = new PersonDao();
 
@@ -65,4 +69,65 @@ public class ExApplication {
     return defer(() -> from(personDao.listPeople(10)))
         .concatWith(defer(() -> allPeople(initialPage + 1)));
   }
+
+  public static void immediateScheduler() {
+    START_TIME = System.currentTimeMillis();
+
+    Scheduler scheduler = Schedulers.immediate();
+    Scheduler.Worker worker = scheduler.createWorker();
+
+    log("Main start");
+    worker.schedule(() -> {
+      log(" Outer start");
+      sleepOneSecond();
+      worker.schedule(() -> {
+        log("  Inner start");
+        sleepOneSecond();
+        log("  Inner end");
+      });
+      log(" Outer end");
+    });
+    log("Main end");
+    worker.unsubscribe();
+    System.out.println("==========\n\n");
+  }
+
+  public static void trampolineScheduler() {
+    START_TIME = System.currentTimeMillis();
+
+    Scheduler scheduler = Schedulers.trampoline();
+    Scheduler.Worker worker = scheduler.createWorker();
+
+    log("Main start");
+    worker.schedule(() -> {
+      log(" Outer start");
+      sleepOneSecond();
+      worker.schedule(() -> {
+        log("  Inner start");
+        sleepOneSecond();
+        log("  Inner end");
+      });
+      log(" Outer end");
+    });
+    log("Main end");
+    worker.unsubscribe();
+    System.out.println("==========\n\n");
+  }
+
+  private static void sleepOneSecond() {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      System.exit(1);
+    }
+  }
+
+  private static void log(String msg) {
+    long elapsedTime = System.currentTimeMillis() - START_TIME;
+    System.out.println(String.format(
+        "%5d", elapsedTime) +
+        "\t| " + Thread.currentThread().getName() + "\t|" + msg);
+  }
+
+
 }
