@@ -7,6 +7,7 @@ import com.thebudding.book.rxjava.dao.PersonDao;
 import com.thebudding.book.rxjava.dto.Book;
 import com.thebudding.book.rxjava.dto.Person;
 import java.util.List;
+import javax.print.attribute.standard.JobStateReason;
 import rx.Observable;
 import rx.Scheduler;
 import rx.observables.BlockingObservable;
@@ -129,5 +130,46 @@ public class ExApplication {
         "\t| " + Thread.currentThread().getName() + "\t|" + msg);
   }
 
+  private static Observable<String> simple() {
+     return Observable.create(subscriber -> {
+       log("Subscribed");
+       subscriber.onNext("A");
+       subscriber.onNext("B");
+       subscriber.onCompleted();
+     });
+  }
 
+
+  public static void declarativeSubscription() {
+    long elapsedTime = System.currentTimeMillis() - START_TIME;
+
+    // simple case
+    System.out.println("Simple Case");
+    simple().subscribe(System.out::println);
+
+
+    // subscribe
+    System.out.println("Subscribe Case");
+    log("Starting");
+    Observable<String> obs2 = simple().map(x -> x).filter(x -> true);
+    log("Transformed");
+    obs2.subscribe(
+        x -> log("Got " + x),
+        Throwable::printStackTrace,
+        () -> log("Completed"));
+    log("Exiting");
+
+    // subscribeOn
+    System.out.println("SubscribeOn Case");
+    log("Starting");
+    final Observable<String> obs = simple();
+    log("Created");
+    obs.subscribeOn(Schedulers.io())
+        .subscribeOn(Schedulers.io())
+        .subscribe(
+            x -> log("Got " + x),
+            Throwable::printStackTrace,
+            () -> log("Completed"));
+    log("Exiting");
+  }
 }

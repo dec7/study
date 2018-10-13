@@ -10,11 +10,13 @@ public class HelloWorld {
     ExApplication.blockingObservable();
 
     ExApplication.lazyCollectionToObservable();
-    */
 
     ExApplication.immediateScheduler();
 
     ExApplication.trampolineScheduler();
+
+    */
+    ExApplication.declarativeSubscription();
 
 
   }
