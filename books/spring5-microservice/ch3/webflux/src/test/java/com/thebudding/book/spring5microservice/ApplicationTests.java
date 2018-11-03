@@ -1,29 +1,34 @@
 package com.thebudding.book.spring5microservice;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
+import com.thebudding.book.spring5microservice.Application.Greet;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class ApplicationTests {
 
-  @Autowired private TestRestTemplate restTemplate;
+  WebTestClient webClient;
+
+  @Before
+  public void setup() {
+    webClient = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
+  }
 
   @Test
-  public void testSpringBootApp() throws JsonProcessingException, IOException {
-    String body = restTemplate.getForObject("/", String.class);
-    assertThat(
-        new ObjectMapper().readTree(body).get("message").textValue(), equalTo("Hello World!"));
+  public void testWebFluxEndpoint() {
+    webClient.get().uri("/")
+        .accept(MediaType.APPLICATION_JSON)
+        .exchange()
+        .expectStatus().isOk()
+        .expectBody(Greet.class).returnResult()
+        .getResponseBody().getMessage().equals("Hello World!");
+
   }
 }

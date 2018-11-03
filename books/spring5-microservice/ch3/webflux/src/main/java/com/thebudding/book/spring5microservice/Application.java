@@ -2,8 +2,9 @@ package com.thebudding.book.spring5microservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 public class Application {
@@ -14,13 +15,13 @@ public class Application {
 
   @RestController
   class GreetingController {
-    @GetMapping("/")
-    Greet greet() {
-      return new Greet("Hello World!");
+    @RequestMapping("/")
+    Mono<Greet> greet() {
+      return Mono.just(new Greet("Hello World!"));
     }
   }
 
-  class Greet {
+  static class Greet {
     private String message;
     public Greet() {}
     public Greet(String message) {
