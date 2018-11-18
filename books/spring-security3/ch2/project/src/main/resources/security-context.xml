@@ -17,6 +17,7 @@
       invalidate-session="true"
       logout-success-url="/"
       logout-url="/logout" />
+    <remember-me key="jbcpPetStore" />
   </http>
 
   <authentication-manager alias="authenticationManager">
