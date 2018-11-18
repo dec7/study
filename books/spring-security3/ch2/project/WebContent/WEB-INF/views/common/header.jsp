@@ -23,7 +23,7 @@
 
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/j_spring_security_logout">Log Out</a></li>
+        <li><a href="/logout">Log Out</a></li>
     </ul>
     <br />
 </div>

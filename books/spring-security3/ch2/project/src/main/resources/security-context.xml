@@ -13,6 +13,10 @@
     <intercept-url pattern="/login" access="permitAll"/>
     <intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>
     <form-login login-page="/login" />
+    <logout
+      invalidate-session="true"
+      logout-success-url="/"
+      logout-url="/logout" />
   </http>
 
   <authentication-manager alias="authenticationManager">
