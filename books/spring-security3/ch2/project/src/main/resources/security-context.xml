@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/security/spring-security-3.2.xsd
 	">
 
-  <http auto-config="true">
+  <http auto-config="true" access-decision-manager-ref="unanimousBased">
     <intercept-url pattern="/*" access="ROLE_USER"/>
   </http>
 
