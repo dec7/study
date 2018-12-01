@@ -39,7 +39,8 @@ public class AppConfig {
 
   @Bean
   public IPTokenBasedRememberMeServices ipTokenBasedRememberMeServicesBean() {
-    return new IPTokenBasedRememberMeServices("jbcpPetStore", userDetailsService);
+    return new IPTokenBasedRememberMeServices("jbcpPetStore", userDetailsService,
+        "_remember_me", "REMEMBER_ME");
   }
 
   @Bean

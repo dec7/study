@@ -16,9 +16,9 @@
     <input id="j_password" name="j_password" size="20" maxlength="50" type="password"/>
     <br />
 
-    <input id="_spring_security_remember_me" name="_spring_security_remember_me"
+    <input id="_remember_me" name="_remember_me"
            type="checkbox" value="true"/>
-    <label for="_spring_security_remember_me">Remember Me?</label>
+    <label for="_remember_me">Remember Me?</label>
     <br />
 
     <input type="submit" value="Login"/>

@@ -16,8 +16,11 @@ public class IPTokenBasedRememberMeServices extends TokenBasedRememberMeServices
 
   public IPTokenBasedRememberMeServices() {}
 
-  public IPTokenBasedRememberMeServices(String key, UserDetailsService userDetailsService) {
+  public IPTokenBasedRememberMeServices(String key, UserDetailsService userDetailsService,
+      String parameter, String cookieName) {
     super(key, userDetailsService);
+    super.setParameter(parameter);
+    super.setCookieName(cookieName);
   }
 
   public HttpServletRequest getContext() {
