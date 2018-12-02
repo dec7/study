@@ -72,6 +72,8 @@ public class AppConfig {
     jdbcUserService.setJdbcTemplate(jdbcTemplate);
     jdbcUserService.setEnableAuthorities(true);
     jdbcUserService.setEnableGroups(true);
+    jdbcUserService.setUsersByUsernameQuery(
+        "SELECT username, password, enabled, salt FROM users where username = ?");
     return jdbcUserService;
   }
 

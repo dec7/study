@@ -1,9 +1,15 @@
 -- ref. Appendix A of Spring Sec 3.0 manual
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS authorities;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS group_authorities;
+DROP TABLE IF EXISTS group_members;
+
 create table users(
   username varchar_ignorecase(50) not null primary key,
   password varchar_ignorecase(50) not null,
-  enabled boolean not null
-  --salt varchar_ignorecase(25) not null
+  enabled boolean not null,
+  salt varchar_ignorecase(25) not null
   );
 
 create table authorities (
