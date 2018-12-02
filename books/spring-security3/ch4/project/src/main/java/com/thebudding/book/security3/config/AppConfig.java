@@ -69,6 +69,19 @@ public class AppConfig {
     jdbcUserService.setJdbcTemplate(jdbcTemplate);
     jdbcUserService.setEnableAuthorities(true);
     jdbcUserService.setEnableGroups(true);
+
+    // customized
+    jdbcUserService.setUsersByUsernameQuery(
+        "SELECT LOGIN, PASSWORD, 1 FROM USER_INFO WHERE LOGIN = ?");
+    jdbcUserService.setGroupAuthoritiesByUsernameQuery(
+        "SELECT G.GROUP_ID, G.GROUP_NAME, P.NAME, "
+            + "FROM USER_INFO U "
+            + "JOIN USER_GROUP UG on U.USER_INFO_ID = UG.USER_INFO_ID "
+            + "JOIN GROUP G ON UG.GROUP_ID = G.GROUP_ID "
+            + "JOIN GROUP_PERMISSION GP ON G.GROUP_ID = GP.GROUP_ID "
+            + "JOIN PERMISSION P ON GP.PERMISSION_ID = P.PERMISSION_ID "
+            + "WHERE U.LOGIN = ?"
+    );
     return jdbcUserService;
   }
 
