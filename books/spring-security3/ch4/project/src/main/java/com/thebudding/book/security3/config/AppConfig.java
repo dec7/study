@@ -20,6 +20,7 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
+import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -84,6 +85,13 @@ public class AppConfig {
     DatabasePasswordSecurerBean databasePasswordSecurerBean = new DatabasePasswordSecurerBean();
     databasePasswordSecurerBean.setDataSource(dataSource);
     return databasePasswordSecurerBean;
+  }
+
+  @Bean
+  public ReflectionSaltSource saltSource() {
+    ReflectionSaltSource saltSource = new ReflectionSaltSource();
+    saltSource.setUserPropertyToUse("username");
+    return saltSource;
   }
 
 
