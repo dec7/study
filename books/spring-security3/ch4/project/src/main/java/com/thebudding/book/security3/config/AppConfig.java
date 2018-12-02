@@ -19,8 +19,7 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 
 @Configuration
@@ -49,9 +48,6 @@ public class AppConfig {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  @Autowired
-  private AuthenticationManager authenticationManager;
-
   @Bean
   public IPTokenBasedRememberMeServices ipTokenBasedRememberMeServicesBean() {
     return new IPTokenBasedRememberMeServices("jbcpPetStore", jdbcUserService(),
@@ -66,22 +62,16 @@ public class AppConfig {
     return new UnanimousBased(list);
   }
 
-  /*
   @Bean
-  public CustomJdbcDaoImpl jdbcUserService() {
+  public UserDetailsService jdbcUserService() {
     CustomJdbcDaoImpl jdbcUserService = new CustomJdbcDaoImpl();
     jdbcUserService.setDataSource(dataSource);
     jdbcUserService.setJdbcTemplate(jdbcTemplate);
+    jdbcUserService.setEnableAuthorities(true);
+    jdbcUserService.setEnableGroups(true);
     return jdbcUserService;
   }
-  */
 
-  @Bean
-  public JdbcUserDetailsManager jdbcUserService() {
-    JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-    jdbcUserDetailsManager.setDataSource(dataSource);
-    jdbcUserDetailsManager.setAuthenticationManager(authenticationManager);
-    return jdbcUserDetailsManager;
-  }
+
 
 }

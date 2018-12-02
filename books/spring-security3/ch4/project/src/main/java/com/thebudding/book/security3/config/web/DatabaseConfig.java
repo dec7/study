@@ -17,7 +17,7 @@ public class DatabaseConfig {
     EmbeddedDatabase db = builder
         .setType(EmbeddedDatabaseType.HSQL) //.H2 or .DERBY
         .addScript("classpath:security-schema.sql")
-        .addScript("classpath:test-data.sql")
+        .addScript("classpath:test-users-groups-data.sql")
         .build();
     return db;
   }
