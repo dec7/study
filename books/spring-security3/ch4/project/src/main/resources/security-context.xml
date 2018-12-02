@@ -11,13 +11,15 @@
 
   <http auto-config="true" use-expressions="true">
     <intercept-url pattern="/login" access="permitAll"/>
+    <intercept-url pattern="/account/*" access="hasRole('ROLE_USER') and fullyAuthenticated"/>
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
     <form-login login-page="/login" />
+    <remember-me key="jbcpPetStore" token-validity-seconds="3600"
+      data-source-ref="dataSource"/>
     <logout
       invalidate-session="true"
       logout-success-url="/"
       logout-url="/logout" />
-    <remember-me key="jbcpPetStore" services-ref="ipTokenBasedRememberMeServicesBean" />
   </http>
 
   <authentication-manager alias="authenticationManager">
