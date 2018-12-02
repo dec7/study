@@ -21,6 +21,8 @@
   </http>
 
   <authentication-manager alias="authenticationManager">
-    <authentication-provider user-service-ref="jdbcUserService" />
+    <authentication-provider user-service-ref="jdbcUserService">
+      <password-encoder hash="sha"/>
+    </authentication-provider>
   </authentication-manager>
 </beans:beans>
