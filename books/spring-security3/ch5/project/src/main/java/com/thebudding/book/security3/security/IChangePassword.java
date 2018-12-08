@@ -1,4 +1,4 @@
-package com.thebudding.book.security3.service;
+package com.thebudding.book.security3.security;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

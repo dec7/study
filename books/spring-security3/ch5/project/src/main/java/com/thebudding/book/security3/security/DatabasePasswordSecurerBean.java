@@ -1,4 +1,4 @@
-package com.thebudding.book.security3.service;
+package com.thebudding.book.security3.security;
 
 import java.sql.ResultSet;
 import javax.annotation.PostConstruct;

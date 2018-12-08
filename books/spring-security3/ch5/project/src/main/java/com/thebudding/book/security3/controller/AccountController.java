@@ -1,6 +1,6 @@
 package com.thebudding.book.security3.controller;
 
-import com.thebudding.book.security3.service.IChangePassword;
+import com.thebudding.book.security3.security.IChangePassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

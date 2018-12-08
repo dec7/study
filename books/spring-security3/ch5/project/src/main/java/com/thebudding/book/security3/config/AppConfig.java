@@ -1,9 +1,9 @@
 package com.thebudding.book.security3.config;
 
 import com.thebudding.book.security3.config.web.DatabaseConfig;
-import com.thebudding.book.security3.service.CustomJdbcDaoImpl;
-import com.thebudding.book.security3.service.DatabasePasswordSecurerBean;
-import com.thebudding.book.security3.service.IPTokenBasedRememberMeServices;
+import com.thebudding.book.security3.security.CustomJdbcDaoImpl;
+import com.thebudding.book.security3.security.DatabasePasswordSecurerBean;
+import com.thebudding.book.security3.security.IPTokenBasedRememberMeServices;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;

@@ -1,4 +1,4 @@
-package com.thebudding.book.security3.service;
+package com.thebudding.book.security3.security;
 
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
