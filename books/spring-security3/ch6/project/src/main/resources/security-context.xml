@@ -35,6 +35,8 @@
       invalidate-session="true"
       logout-success-url="/"
       logout-url="/logout" />
+
+    <custom-filter ref="ipFilter" before="FILTER_SECURITY_INTERCEPTOR" />
   </http>
 
   <authentication-manager alias="authenticationManager">

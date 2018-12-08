@@ -3,6 +3,7 @@ package com.thebudding.book.security3.config;
 import com.thebudding.book.security3.config.web.DatabaseConfig;
 import com.thebudding.book.security3.security.CustomJdbcDaoImpl;
 import com.thebudding.book.security3.security.DatabasePasswordSecurerBean;
+import com.thebudding.book.security3.security.IPRoleAuthenticationFilter;
 import com.thebudding.book.security3.security.IPTokenBasedRememberMeServices;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,17 @@ public class AppConfig {
     jdbcUserService.setUsersByUsernameQuery(
         "SELECT username, password, enabled, salt FROM users where username = ?");
     return jdbcUserService;
+  }
+
+  @Bean
+  public IPRoleAuthenticationFilter ipFilter() {
+    List<String> ipAddresses = new ArrayList<>();
+    ipAddresses.add("127.0.0.1");
+
+    IPRoleAuthenticationFilter filter = new IPRoleAuthenticationFilter();
+    filter.setTargetRole("ROLE_ADMIN");
+    filter.setAllowedIPAddressed(ipAddresses);
+    return filter;
   }
 
   @Bean
