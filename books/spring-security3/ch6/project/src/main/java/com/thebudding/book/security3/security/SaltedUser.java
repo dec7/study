@@ -4,11 +4,11 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class SaltUser extends User {
+public class SaltedUser extends User {
 
   private String salt;
 
-  public SaltUser(String username, String password, boolean enabled, boolean accountNonExpired,
+  public SaltedUser(String username, String password, boolean enabled, boolean accountNonExpired,
       boolean credentialsNonExpired, boolean accountNonLocked,
       Collection<? extends GrantedAuthority> authorities, String salt) {
     super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,

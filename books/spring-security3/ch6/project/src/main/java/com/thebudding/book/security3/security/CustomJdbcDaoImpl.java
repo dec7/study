@@ -35,13 +35,13 @@ public class CustomJdbcDaoImpl extends JdbcDaoImpl implements IChangePassword {
       resultUsername = username;
     }
 
-    return new SaltUser(
+    return new SaltedUser(
         resultUsername,
         userFromUserQuery.getPassword(),
         userFromUserQuery.isEnabled(),
         true, true, true,
         combinedAuthorities,
-        ((SaltUser) userFromUserQuery).getSalt());
+        ((SaltedUser) userFromUserQuery).getSalt());
   }
 
   @Override
@@ -55,7 +55,7 @@ public class CustomJdbcDaoImpl extends JdbcDaoImpl implements IChangePassword {
           boolean enabled = rs.getBoolean(3);
           String salt = rs.getString(4);
 
-          return new SaltUser(
+          return new SaltedUser(
               name, password, enabled,
               true, true, true,
               AuthorityUtils.NO_AUTHORITIES, salt);

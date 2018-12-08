@@ -5,6 +5,8 @@ import com.thebudding.book.security3.security.CustomJdbcDaoImpl;
 import com.thebudding.book.security3.security.DatabasePasswordSecurerBean;
 import com.thebudding.book.security3.security.IPRoleAuthenticationFilter;
 import com.thebudding.book.security3.security.IPTokenBasedRememberMeServices;
+import com.thebudding.book.security3.security.RequestHeaderProcessingFilter;
+import com.thebudding.book.security3.security.SignedUsernamePasswordAuthenticationProvider;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
@@ -21,6 +23,7 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -50,6 +53,9 @@ public class AppConfig {
 
   @Autowired
   private JdbcTemplate jdbcTemplate;
+
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
   @Bean
   public IPTokenBasedRememberMeServices ipTokenBasedRememberMeServicesBean() {
@@ -85,6 +91,23 @@ public class AppConfig {
     IPRoleAuthenticationFilter filter = new IPRoleAuthenticationFilter();
     filter.setTargetRole("ROLE_ADMIN");
     filter.setAllowedIPAddressed(ipAddresses);
+    return filter;
+  }
+
+  @Bean
+  public SignedUsernamePasswordAuthenticationProvider signedRequestAuthenticationProvider() {
+    SignedUsernamePasswordAuthenticationProvider provider =
+        new SignedUsernamePasswordAuthenticationProvider();
+    provider.setPasswordEncoder(passwordEncoder());
+    provider.setSaltSource(saltSource());
+    provider.setUserDetailsService(jdbcUserService());
+    return provider;
+  }
+
+  @Bean
+  public RequestHeaderProcessingFilter requestHeaderFilter() {
+    RequestHeaderProcessingFilter filter = new RequestHeaderProcessingFilter();
+    filter.setAuthenticationManager(authenticationManager);
     return filter;
   }
 
