@@ -1,11 +1,12 @@
 package com.thebudding.book.security3.service;
 
+import javax.annotation.security.RolesAllowed;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 public interface IUserService {
 
-  @PreAuthorize("hasRole('ROLE_USER')")
-  // @PreAuthorize("hasRole('ROLE_ADMIN')") 403 error
+  @RolesAllowed("ROLE_USER")
+  //@RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
   void changePassword(String username, String password);
 
 }
