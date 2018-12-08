@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class LoginLogoutController {
+public class LoginLogoutController extends BaseController {
 
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public void home() {

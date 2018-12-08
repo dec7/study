@@ -10,11 +10,24 @@
 	">
 
   <global-method-security pre-post-annotations="enabled" />
+  <!--
+  <global-method-security>
+    <protect-pointcut
+      expression="execution(* com.thebudding.book.security3.dao.IProductDao.getCategories(..))"
+      access="ROLE_USER" />
+
+    <protect-pointcut
+      expression="execution(* com.thebudding.book.security3.service.I*Service.*(..))"
+      access="ROLE_ADMIN" />
+  </global-method-security>
+  -->
 
   <http auto-config="true" use-expressions="true">
+    <intercept-url pattern="/styles/**" access="permitAll" />
     <intercept-url pattern="/login" access="permitAll" />
     <intercept-url pattern="/account/*" access="hasRole('ROLE_USER') and fullyAuthenticated"/>
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+
     <form-login login-page="/login" />
     <remember-me key="jbcpPetStore" token-validity-seconds="3600"
       data-source-ref="dataSource"/>

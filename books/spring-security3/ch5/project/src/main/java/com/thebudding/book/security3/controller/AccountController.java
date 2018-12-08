@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AccountController {
+public class AccountController extends BaseController {
 
   @Autowired
-  private IUserService changePasswordDao;
+  private IUserService iUserService;
 
   @RequestMapping("/account/home")
   public void accountHome() {
@@ -30,7 +30,7 @@ public class AccountController {
     if (principal instanceof UserDetails) {
       username = ((UserDetails) principal).getUsername();
     }
-    changePasswordDao.changePassword(username, newPassword);
+    iUserService.changePassword(username, newPassword);
     SecurityContextHolder.clearContext();
 
     return "redirect:home";

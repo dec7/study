@@ -22,7 +22,6 @@ import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 
 @Configuration
@@ -66,7 +65,7 @@ public class AppConfig {
   }
 
   @Bean
-  public UserDetailsService jdbcUserService() {
+  public CustomJdbcDaoImpl jdbcUserService() {
     CustomJdbcDaoImpl jdbcUserService = new CustomJdbcDaoImpl();
     jdbcUserService.setDataSource(dataSource);
     jdbcUserService.setJdbcTemplate(jdbcTemplate);

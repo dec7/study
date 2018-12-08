@@ -25,6 +25,7 @@
         <li><a href="/">Home</a></li>
         <li><a href="/logout">Log Out</a></li>
         <li><a href="/account/home">My Account</a></li>
+        <li><a href="/wishlist/home">My Wishlist</a></li>
     </ul>
     <br />
 </div>

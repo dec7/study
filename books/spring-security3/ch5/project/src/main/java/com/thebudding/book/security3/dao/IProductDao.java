@@ -1,0 +1,15 @@
+package com.thebudding.book.security3.dao;
+
+import com.thebudding.book.security3.data.Category;
+import java.util.Collection;
+import org.springframework.security.access.prepost.PostFilter;
+
+public interface IProductDao {
+
+  Collection<Category> getCategories();
+
+  Category getCategoryByName(String name);
+
+  @PostFilter("(!filterObject.customersOnly) or (filterObject.customersOnly and hasRole('ROLE_ADMIN'))")
+  Collection<Category> filterCategories(Collection<Category> categories);
+}
