@@ -1,5 +1,6 @@
 package com.thebudding.book.security3.security;
 
+import com.thebudding.book.security3.service.IUserService;
 import java.sql.ResultSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
-public class CustomJdbcDaoImpl extends JdbcDaoImpl implements IChangePassword {
+public class CustomJdbcDaoImpl extends JdbcDaoImpl implements IUserService {
 
   @Autowired
   private ShaPasswordEncoder passwordEncoder;

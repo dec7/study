@@ -1,6 +1,6 @@
 package com.thebudding.book.security3.controller;
 
-import com.thebudding.book.security3.security.IChangePassword;
+import com.thebudding.book.security3.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AccountController {
 
   @Autowired
-  private IChangePassword changePasswordDao;
+  private IUserService changePasswordDao;
 
   @RequestMapping("/account/home")
   public void accountHome() {
