@@ -1,10 +1,11 @@
 package com.thebudding.book.security3.config;
 
-import com.thebudding.book.security3.config.web.DatabaseConfig;
+import com.thebudding.book.security3.data.Category;
 import com.thebudding.book.security3.security.CustomJdbcDaoImpl;
 import com.thebudding.book.security3.security.DatabasePasswordSecurerBean;
 import com.thebudding.book.security3.security.IPRoleAuthenticationFilter;
 import com.thebudding.book.security3.security.IPTokenBasedRememberMeServices;
+import com.thebudding.book.security3.security.NullAclCache;
 import com.thebudding.book.security3.security.RequestHeaderProcessingFilter;
 import com.thebudding.book.security3.security.SignedUsernamePasswordAuthenticationProvider;
 import java.util.ArrayList;
@@ -20,13 +21,23 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
+import org.springframework.security.acls.AclEntryVoter;
+import org.springframework.security.acls.domain.AclAuthorizationStrategyImpl;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.domain.ConsoleAuditLogger;
+import org.springframework.security.acls.jdbc.BasicLookupStrategy;
+import org.springframework.security.acls.jdbc.JdbcAclService;
+import org.springframework.security.acls.model.Permission;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.authentication.event.LoggerListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.stereotype.Controller;
 
 @Configuration
@@ -139,6 +150,61 @@ public class AppConfig {
   @Bean
   public org.springframework.security.access.event.LoggerListener authorizationListener() {
     return new org.springframework.security.access.event.LoggerListener();
+  }
+
+  @Bean
+  public AffirmativeBased aclDecisionManager() {
+    List<AccessDecisionVoter> list = new ArrayList<>();
+    list.add(categoryReadVoter());
+
+    AffirmativeBased affirmativeBased = new AffirmativeBased();
+    affirmativeBased.setDecisionVoters(list);
+
+    return affirmativeBased;
+  }
+
+  @Bean
+  public AclEntryVoter categoryReadVoter() {
+    AclEntryVoter voter = new AclEntryVoter(aclService(), "VOTE_CATEGORY_READ",
+        new Permission[]{BasePermission.READ});
+    voter.setProcessDomainObjectClass(Category.class);
+    return voter;
+  }
+
+  @Bean
+  public JdbcAclService aclService() {
+    return new JdbcAclService(dataSource, lookupStrategy());
+  }
+
+  @Bean
+  public BasicLookupStrategy lookupStrategy() {
+    return new BasicLookupStrategy(dataSource, aclCache(),
+        aclAuthorizationStrategy(), aclAuditLogger());
+  }
+
+  @Bean
+  public NullAclCache aclCache() {
+    return new NullAclCache();
+  }
+
+  @Bean
+  public ConsoleAuditLogger aclAuditLogger() {
+    return new ConsoleAuditLogger();
+  }
+
+  @Bean
+  public AclAuthorizationStrategyImpl aclAuthorizationStrategy() {
+    List<GrantedAuthority> list = new ArrayList<>();
+    list.add(aclAdminAuthority());
+    list.add(aclAdminAuthority());
+    list.add(aclAdminAuthority());
+
+    return new AclAuthorizationStrategyImpl(list.toArray(new GrantedAuthority[0]));
+  }
+
+  @Bean
+  public GrantedAuthorityImpl aclAdminAuthority() {
+    return new GrantedAuthorityImpl("ROLE_ADMIN");
   }
 
 }

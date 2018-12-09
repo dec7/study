@@ -1,6 +1,7 @@
 package com.thebudding.book.security3.dao;
 
 import com.thebudding.book.security3.data.Category;
+import com.thebudding.book.security3.data.Item;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.stereotype.Repository;
@@ -42,5 +43,12 @@ public class ProductDao implements IProductDao {
   @Override
   public Collection<Category> filterCategories(Collection<Category> categories) {
     return categories;
+  }
+
+  @Override
+  public Collection<Item> getItemsByCategory(Category cat) {
+    Collection<Item> items = new ArrayList<>();
+
+    return items;
   }
 }

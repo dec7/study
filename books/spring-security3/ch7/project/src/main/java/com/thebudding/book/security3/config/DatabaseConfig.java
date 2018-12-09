@@ -1,4 +1,4 @@
-package com.thebudding.book.security3.config.web;
+package com.thebudding.book.security3.config;
 
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +19,8 @@ public class DatabaseConfig {
         .addScript("classpath:security-schema.sql")
         .addScript("classpath:remember-me-schema.sql")
         .addScript("classpath:test-users-groups-data.sql")
+        .addScript("classpath:acl-schema.sql")
+        .addScript("classpath:test-acl-data.sql")
         .build();
     return db;
   }

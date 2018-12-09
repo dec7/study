@@ -2,6 +2,7 @@ package com.thebudding.book.security3.service;
 
 import com.thebudding.book.security3.dao.IProductDao;
 import com.thebudding.book.security3.data.Category;
+import com.thebudding.book.security3.data.Item;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class ProductServiceImpl implements IProductService {
   @Override
   public Category getCategoryByName(String name) {
     return productDao.getCategoryByName(name);
+  }
+
+  @Override
+  public Collection<Item> getItemsByCategory(Category category) {
+    return productDao.getItemsByCategory(category);
   }
 
 }
