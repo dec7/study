@@ -26,6 +26,7 @@ import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.authentication.event.LoggerListener;
 import org.springframework.stereotype.Controller;
 
 @Configuration
@@ -130,6 +131,14 @@ public class AppConfig {
     return saltSource;
   }
 
+  @Bean
+  public LoggerListener authenticationListener() {
+    return new LoggerListener();
+  }
 
+  @Bean
+  public org.springframework.security.access.event.LoggerListener authorizationListener() {
+    return new org.springframework.security.access.event.LoggerListener();
+  }
 
 }
