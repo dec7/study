@@ -39,6 +39,9 @@
 
     <custom-filter ref="requestHeaderFilter" before="FORM_LOGIN_FILTER" />
     <custom-filter ref="ipFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+
+    <session-management session-fixation-protection="migrateSession" />
+    <!--<session-management session-fixation-protection="none" />-->
   </http>
 
   <authentication-manager alias="authenticationManager">
