@@ -4,6 +4,7 @@ import com.thebudding.book.security3.config.web.WebConfig;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -28,6 +29,7 @@ public class AppInitializer implements WebApplicationInitializer {
 
     // root application context 라이프사이클 관리
     servletContext.addListener(new ContextLoaderListener(rootContext));
+    //servletContext.addListener(new HttpSessionEventPublisher());
 
     // spring application context의 dispatcher servlet
     AnnotationConfigWebApplicationContext

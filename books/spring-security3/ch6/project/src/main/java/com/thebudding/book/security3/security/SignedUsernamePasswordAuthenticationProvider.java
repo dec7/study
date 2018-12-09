@@ -28,14 +28,12 @@ public class SignedUsernamePasswordAuthenticationProvider extends DaoAuthenticat
           userDetails);
     }
 
-    /*
     if (!signedToken.getRequestSignature().equals(calculateExpectedSignature(signedToken))) {
       throw new BadCredentialsException(
           messages.getMessage("SignedUsernamePasswordAuthenticationProvider.badSignature",
               "Invalid request signature"),
           userDetails);
     }
-    */
   }
 
   private String calculateExpectedSignature(SignedUsernamePasswordAuthenticationToken signedToken) {
