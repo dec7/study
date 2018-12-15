@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -20,7 +21,7 @@ public class DatabaseConfig {
         .addScript("classpath:remember-me-schema.sql")
         .addScript("classpath:test-users-groups-data.sql")
         .addScript("classpath:acl-schema.sql")
-        .addScript("classpath:test-acl-data.sql")
+        //.addScript("classpath:test-acl-data.sql")
         .build();
     return db;
   }
@@ -30,6 +31,14 @@ public class DatabaseConfig {
     JdbcTemplate jdbcTemplate = new JdbcTemplate();
     jdbcTemplate.setDataSource(dataSource());
     return jdbcTemplate;
+  }
+
+
+  @Bean
+  public DataSourceTransactionManager txManager() {
+    DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+    txManager.setDataSource(dataSource());
+    return txManager;
   }
 
 }

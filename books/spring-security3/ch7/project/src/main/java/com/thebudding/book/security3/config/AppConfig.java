@@ -1,6 +1,7 @@
 package com.thebudding.book.security3.config;
 
 import com.thebudding.book.security3.data.Category;
+import com.thebudding.book.security3.security.AclBootstrapBean;
 import com.thebudding.book.security3.security.CustomJdbcDaoImpl;
 import com.thebudding.book.security3.security.CustomPermission;
 import com.thebudding.book.security3.security.CustomPermissionFactory;
@@ -22,6 +23,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
@@ -33,6 +35,7 @@ import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.security.acls.domain.ConsoleAuditLogger;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcAclService;
+import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.security.acls.model.Permission;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
@@ -222,6 +225,16 @@ public class AppConfig {
   @Bean
   public GrantedAuthorityImpl aclAdminAuthority() {
     return new GrantedAuthorityImpl("ROLE_ADMIN");
+  }
+
+  @Bean
+  public JdbcMutableAclService mutableAclService() {
+    return new JdbcMutableAclService(dataSource, lookupStrategy(), aclCache());
+  }
+
+  @Bean
+  public AclBootstrapBean aclBootstrapBean() {
+    return new AclBootstrapBean();
   }
 
 }
