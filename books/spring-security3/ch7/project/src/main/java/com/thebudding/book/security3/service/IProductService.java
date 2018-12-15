@@ -11,7 +11,7 @@ public interface IProductService {
 
   Category getCategoryByName(String name);
 
-  @Secured("VOTE_CATEGORY_READ")
+  @Secured({"VOTE_CATEGORY_READ","VOTE_ADMIN_READ"})
   Collection<Item> getItemsByCategory(Category category);
 
 }

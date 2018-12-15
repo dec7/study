@@ -2,6 +2,8 @@ package com.thebudding.book.security3.config;
 
 import com.thebudding.book.security3.data.Category;
 import com.thebudding.book.security3.security.CustomJdbcDaoImpl;
+import com.thebudding.book.security3.security.CustomPermission;
+import com.thebudding.book.security3.security.CustomPermissionFactory;
 import com.thebudding.book.security3.security.DatabasePasswordSecurerBean;
 import com.thebudding.book.security3.security.IPRoleAuthenticationFilter;
 import com.thebudding.book.security3.security.IPTokenBasedRememberMeServices;
@@ -156,6 +158,7 @@ public class AppConfig {
   public AffirmativeBased aclDecisionManager() {
     List<AccessDecisionVoter> list = new ArrayList<>();
     list.add(categoryReadVoter());
+    list.add(adminResourceReadVoter());
 
     AffirmativeBased affirmativeBased = new AffirmativeBased();
     affirmativeBased.setDecisionVoters(list);
@@ -178,8 +181,25 @@ public class AppConfig {
 
   @Bean
   public BasicLookupStrategy lookupStrategy() {
-    return new BasicLookupStrategy(dataSource, aclCache(),
+    BasicLookupStrategy lookupStrategy = new BasicLookupStrategy(dataSource, aclCache(),
         aclAuthorizationStrategy(), aclAuditLogger());
+    lookupStrategy.setPermissionFactory(customPermissionFactory());
+
+    return lookupStrategy;
+  }
+
+  @Bean
+  public CustomPermissionFactory customPermissionFactory() {
+    return new CustomPermissionFactory();
+  }
+
+  @Bean
+  public AclEntryVoter adminResourceReadVoter() {
+    AclEntryVoter aclEntryVoter = new AclEntryVoter(
+        aclService(), "VOTE_ADMIN_READ",
+        new Permission[]{CustomPermission.ADMIN_READ});
+    aclEntryVoter.setProcessDomainObjectClass(Category.class);
+    return aclEntryVoter;
   }
 
   @Bean
@@ -194,12 +214,9 @@ public class AppConfig {
 
   @Bean
   public AclAuthorizationStrategyImpl aclAuthorizationStrategy() {
-    List<GrantedAuthority> list = new ArrayList<>();
-    list.add(aclAdminAuthority());
-    list.add(aclAdminAuthority());
-    list.add(aclAdminAuthority());
-
-    return new AclAuthorizationStrategyImpl(list.toArray(new GrantedAuthority[0]));
+    GrantedAuthority[] authorities =
+        { aclAdminAuthority(), aclAdminAuthority(), aclAdminAuthority() };
+    return new AclAuthorizationStrategyImpl(authorities);
   }
 
   @Bean
