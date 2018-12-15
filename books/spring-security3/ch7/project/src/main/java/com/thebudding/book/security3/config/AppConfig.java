@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.ehcache.EhCacheFactoryBean;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -23,7 +25,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
@@ -33,6 +34,7 @@ import org.springframework.security.acls.AclEntryVoter;
 import org.springframework.security.acls.domain.AclAuthorizationStrategyImpl;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.security.acls.domain.ConsoleAuditLogger;
+import org.springframework.security.acls.domain.EhCacheBasedAclCache;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcAclService;
 import org.springframework.security.acls.jdbc.JdbcMutableAclService;
@@ -184,7 +186,7 @@ public class AppConfig {
 
   @Bean
   public BasicLookupStrategy lookupStrategy() {
-    BasicLookupStrategy lookupStrategy = new BasicLookupStrategy(dataSource, aclCache(),
+    BasicLookupStrategy lookupStrategy = new BasicLookupStrategy(dataSource, ehCacheAclCache(),
         aclAuthorizationStrategy(), aclAuditLogger());
     lookupStrategy.setPermissionFactory(customPermissionFactory());
 
@@ -206,11 +208,6 @@ public class AppConfig {
   }
 
   @Bean
-  public NullAclCache aclCache() {
-    return new NullAclCache();
-  }
-
-  @Bean
   public ConsoleAuditLogger aclAuditLogger() {
     return new ConsoleAuditLogger();
   }
@@ -229,12 +226,30 @@ public class AppConfig {
 
   @Bean
   public JdbcMutableAclService mutableAclService() {
-    return new JdbcMutableAclService(dataSource, lookupStrategy(), aclCache());
+    return new JdbcMutableAclService(dataSource, lookupStrategy(), ehCacheAclCache());
   }
 
   @Bean
   public AclBootstrapBean aclBootstrapBean() {
     return new AclBootstrapBean();
+  }
+
+  @Bean
+  public EhCacheManagerFactoryBean ehCacheManagerBean() {
+    return new EhCacheManagerFactoryBean();
+  }
+
+  @Bean
+  public EhCacheFactoryBean ehCacheFactoryBean() {
+    EhCacheFactoryBean factoryBean = new EhCacheFactoryBean();
+    factoryBean.setCacheManager(ehCacheManagerBean().getObject());
+    factoryBean.setCacheName("springAclCacheRegion");
+    return factoryBean;
+  }
+
+  @Bean
+  public EhCacheBasedAclCache ehCacheAclCache() {
+    return new EhCacheBasedAclCache(ehCacheFactoryBean().getObject());
   }
 
 }
