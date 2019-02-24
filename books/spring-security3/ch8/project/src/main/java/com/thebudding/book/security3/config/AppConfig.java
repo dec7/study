@@ -8,7 +8,7 @@ import com.thebudding.book.security3.security.CustomPermissionFactory;
 import com.thebudding.book.security3.security.DatabasePasswordSecurerBean;
 import com.thebudding.book.security3.security.IPRoleAuthenticationFilter;
 import com.thebudding.book.security3.security.IPTokenBasedRememberMeServices;
-import com.thebudding.book.security3.security.NullAclCache;
+import com.thebudding.book.security3.security.OpenIDAuthenticationFailureHandler;
 import com.thebudding.book.security3.security.RequestHeaderProcessingFilter;
 import com.thebudding.book.security3.security.SignedUsernamePasswordAuthenticationProvider;
 import java.util.ArrayList;
@@ -250,6 +250,13 @@ public class AppConfig {
   @Bean
   public EhCacheBasedAclCache ehCacheAclCache() {
     return new EhCacheBasedAclCache(ehCacheFactoryBean().getObject());
+  }
+
+  @Bean
+  public OpenIDAuthenticationFailureHandler openIdAuthFailureHandler() {
+    OpenIDAuthenticationFailureHandler handler = new OpenIDAuthenticationFailureHandler();
+    handler.setDefaultFailureUrl("/login");
+    return handler;
   }
 
 }

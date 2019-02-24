@@ -17,4 +17,9 @@ public class UserServiceImpl implements IUserService {
     changePassword.changePassword(username, password);
   }
 
+  @Override
+  public void createUser(String userId, String unused, Object o) {
+    
+  }
+
 }

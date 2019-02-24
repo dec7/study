@@ -21,3 +21,9 @@ insert into group_members(group_id, username)
 select id, 'admin' from groups where group_name = 'Administrators';
 insert into group_members(group_id, username)
 select id, 'admin2' from groups where group_name = 'Administrators';
+
+insert into users(username, password, enabled, salt)
+values ('https://cocagolau.myopenid.com', 'unused', true, cast(rand()*1000000000 as varchar(25)))
+
+insert into group_members(group_id, username)
+select id, 'https://cocagolau.myopenid.com' from groups where group_name = 'Administrators'

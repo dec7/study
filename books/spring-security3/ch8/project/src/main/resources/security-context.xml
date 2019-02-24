@@ -29,6 +29,7 @@
     <access-denied-handler error-page="/accessDenied" />
 
     <intercept-url pattern="/styles/**" access="permitAll" />
+    <intercept-url pattern="/images/**" access="permitAll" />
     <intercept-url pattern="/login" access="permitAll" />
     <intercept-url pattern="/account/*" access="hasRole('ROLE_USER') and fullyAuthenticated"/>
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
@@ -47,6 +48,8 @@
     <session-management>
       <concurrency-control max-sessions="1" expired-url="/login?error=expired"/>
     </session-management>
+
+    <openid-login authentication-failure-handler-ref="openIdAuthFailureHandler" />
   </http>
 
   <authentication-manager alias="authenticationManager">
