@@ -1,8 +1,14 @@
 package com.thebudding.book.effectivejava.item13;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class PhoneNumber implements Cloneable {
+public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
+
+  private static final Comparator<PhoneNumber> COMPARATOR =
+      Comparator.comparingInt((PhoneNumber pn) -> pn.areaCode)
+          .thenComparingInt(pn -> pn.prefix)
+          .thenComparingInt(pn -> pn.lineNum);
 
   private final short areaCode, prefix, lineNum;
 
@@ -55,5 +61,20 @@ public class PhoneNumber implements Cloneable {
         ", prefix=" + prefix +
         ", lineNum=" + lineNum +
         '}';
+  }
+
+  @Override
+  public int compareTo(PhoneNumber that) {
+    /*
+    int result = Short.compare(areaCode, that.areaCode);
+    if (result == 0) {
+      result = Short.compare(prefix, that.prefix);
+      if (result == 0) {
+        result = Short.compare(lineNum, that.lineNum);
+      }
+    }
+    return result;
+    */
+    return COMPARATOR.compare(that, that);
   }
 }
