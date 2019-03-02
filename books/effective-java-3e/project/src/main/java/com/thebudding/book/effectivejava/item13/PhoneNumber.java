@@ -2,7 +2,7 @@ package com.thebudding.book.effectivejava.item13;
 
 import java.util.Objects;
 
-public class PhoneNumber {
+public class PhoneNumber implements Cloneable {
 
   private final short areaCode, prefix, lineNum;
 
@@ -17,6 +17,16 @@ public class PhoneNumber {
       throw new IllegalArgumentException(arg + ": " + val);
     }
     return (short) val;
+  }
+
+  @Override
+  public PhoneNumber clone() {
+
+    try {
+      return (PhoneNumber) super.clone();
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 
   @Override
@@ -36,5 +46,14 @@ public class PhoneNumber {
   @Override
   public int hashCode() {
     return Objects.hash(areaCode, prefix, lineNum);
+  }
+
+  @Override
+  public String toString() {
+    return "PhoneNumber{" +
+        "areaCode=" + areaCode +
+        ", prefix=" + prefix +
+        ", lineNum=" + lineNum +
+        '}';
   }
 }
