@@ -2,6 +2,7 @@ package com.thebudding.book.effectivejava.item30;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.UnaryOperator;
 import org.junit.Test;
@@ -29,5 +30,12 @@ public class GenericMethodTest {
     for (Number n : num) {
       System.out.println(numOp.apply(n));
     }
+  }
+
+  @Test
+  public void test3() {
+    List<Integer> num = List.of(9,8,7,6,5);
+    Integer result = GenericMethod.max(num);
+    System.out.println(result);
   }
 }
