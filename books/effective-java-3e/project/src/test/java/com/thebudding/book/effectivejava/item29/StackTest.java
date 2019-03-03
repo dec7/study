@@ -9,7 +9,7 @@ public class StackTest {
 
   @Test
   public void test() {
-    Stack stack = new Stack();
+    Stack<Momo> stack = new Stack<>();
     assertThat(stack.isEmpty(), equalTo(true));
 
     stack.push(new Momo());
