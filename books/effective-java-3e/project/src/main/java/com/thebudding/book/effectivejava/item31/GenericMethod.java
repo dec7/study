@@ -2,6 +2,7 @@ package com.thebudding.book.effectivejava.item31;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.UnaryOperator;
@@ -22,7 +23,7 @@ public class GenericMethod {
   }
 
 
-  public static <E extends Comparable<E>> E max(Collection<E> c) {
+  public static <E extends Comparable<? super E>> E max(List<? extends E> c) {
     if (c.isEmpty()) {
       throw new IllegalArgumentException("Collection is empty.");
     }
