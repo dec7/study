@@ -1,4 +1,4 @@
-package com.thebudding.study.object;
+package com.thebudding.study.object.ch1;
 
 public class Bag {
   private Long amount;
