@@ -9,7 +9,8 @@ fun main(args: Array<String>) {
     } else {
         "None"
     }
-    println(auraColor)
+    println("(Aura: $auraColor) " +
+            "(Blessed: ${if (isBlessed) "YES" else "NO"})")
 
     val healthStatus = when (healthPoints) {
         100 -> "최상의 상태임!"
@@ -23,7 +24,7 @@ fun main(args: Array<String>) {
         else -> "최악의 상태임!"
     }
 
-    println(name + " " + healthStatus)
+    println("$name $healthStatus")
 
     val race = "gnome"
     val faction = when (race) {
