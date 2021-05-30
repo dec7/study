@@ -1,7 +1,14 @@
 fun main(args: Array<String>) {
     var name = "마드리갈"
-    var healthPoints = 100
+    var healthPoints = 87
     val isBlessed = true
+    val isImmortal = false
+
+    if (isBlessed && healthPoints > 50 || isImmortal) {
+        println("Green")
+    } else {
+        println("None")
+    }
 
     if (healthPoints == 100) {
         println(name + " 최상의 상태임!")
