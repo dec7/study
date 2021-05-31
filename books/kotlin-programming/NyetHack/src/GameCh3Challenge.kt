@@ -29,6 +29,7 @@ fun main(args: Array<String>) {
         else -> ""
     }
     println("$karma -> $karmaColor")
+    `**~prolly not a good idea!~**`()
 }
 
 private fun printPlayerStatus(
@@ -63,3 +64,7 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
 
 private fun castFireBall(numFireBalls: Int = 2) =
     println("한 덩어리의 파이볼이 나타난다. (x$numFireBalls)")
+
+fun `**~prolly not a good idea!~**`() {
+
+}
