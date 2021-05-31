@@ -5,6 +5,7 @@ fun main(args: Array<String>) {
 inline fun runSimulation() {
     var greetingFunction = configureGreetingFunction()
     println(greetingFunction("김선달"))
+    println(greetingFunction("김선달"))
 }
 
 fun configureGreetingFunction(): (String) -> String {
