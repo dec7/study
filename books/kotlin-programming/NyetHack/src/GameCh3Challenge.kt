@@ -7,6 +7,8 @@ fun main(args: Array<String>) {
     val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
+    val status = "Status"
+    printPlayerStatus(auraColor = "NONE", isBlessed = true, name = "마드리갈", healthStatus = status)
     castFireBall()
 
     val race = "gnome"
