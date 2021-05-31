@@ -4,19 +4,9 @@ fun main(args: Array<String>) {
     val isBlessed = true
     val isImmortal = false
 
-    val auraColor = if (isBlessed && healthPoints > 50 || isImmortal) {
-        "Green"
-    } else {
-        "None"
-    }
-    println(
-        "(Aura: $auraColor) " +
-                "(Blessed: ${if (isBlessed) "YES" else "NO"})"
-    )
-
+    val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
-
-    println("$name $healthStatus")
+    printPlayerStatus(auraColor, isBlessed, name, healthStatus)
 
     val race = "gnome"
     val faction = when (race) {
@@ -37,6 +27,23 @@ fun main(args: Array<String>) {
     }
     println("$karma -> $karmaColor")
 }
+
+private fun printPlayerStatus(
+    auraColor: String,
+    isBlessed: Boolean,
+    name: String,
+    healthStatus: String
+) {
+    println("(Aura: $auraColor) (Blessed: ${if (isBlessed) "YES" else "NO"})")
+    println("$name $healthStatus")
+}
+
+private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean) =
+    if (isBlessed && healthPoints > 50 || isImmortal) {
+        "Green"
+    } else {
+        "None"
+    }
 
 private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
     val healthStatus = when (healthPoints) {
