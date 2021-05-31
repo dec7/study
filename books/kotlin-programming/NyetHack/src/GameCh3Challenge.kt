@@ -7,6 +7,7 @@ fun main(args: Array<String>) {
     val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
+    castFireBall(5)
 
     val race = "gnome"
     val faction = when (race) {
@@ -58,4 +59,8 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
         else -> "최악의 상태임!"
     }
     return healthStatus
+}
+
+private fun castFireBall(numFireBalls: Int) {
+    println("한 덩어리의 파이볼이 나타난다. (x$numFireBalls)")
 }
