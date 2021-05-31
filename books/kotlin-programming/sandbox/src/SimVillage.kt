@@ -1,5 +1,6 @@
 fun main(args: Array<String>) {
     runSimulation()
+    runMyRunnable { println("hey now") }
 }
 
 inline fun runSimulation() {
@@ -17,4 +18,8 @@ fun configureGreetingFunction(): (String) -> String {
         println("$numBuildings 채의 $structureType 이 추가됨")
         "SimVillage 방문을 환영합니다, $playerName! (copyright $currentYear)"
     }
+}
+
+fun runMyRunnable(runnable: () -> Unit) = {
+    runnable()
 }
