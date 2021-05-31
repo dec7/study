@@ -21,6 +21,12 @@ fun main(args: Array<String>) {
     }
     println("$karma -> $karmaColor")
     `**~prolly not a good idea!~**`()
+
+    val numLetters = "Mississippi".count()
+    println(numLetters)
+
+    val numLettersOnlyS = "Mississippi".count({ letter -> letter == 's'})
+    println(numLettersOnlyS)
 }
 
 private fun printPlayerStatus(
