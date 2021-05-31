@@ -27,6 +27,8 @@ fun main(args: Array<String>) {
 
     val numLettersOnlyS = "Mississippi".count({ letter -> letter == 's'})
     println(numLettersOnlyS)
+
+    println("Mississippi".count { it == 's' })
 }
 
 private fun printPlayerStatus(
