@@ -46,8 +46,8 @@ private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean
         "None"
     }
 
-private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
-    val healthStatus = when (healthPoints) {
+private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
+    when (healthPoints) {
         100 -> "최상의 상태임!"
         in 90..99 -> "약간의 찰과상만 있음"
         in 75..89 -> if (isBlessed) {
@@ -58,9 +58,6 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
         in 15..74 -> "많이 다친 것 같음"
         else -> "최악의 상태임!"
     }
-    return healthStatus
-}
 
-private fun castFireBall(numFireBalls: Int = 2) {
+private fun castFireBall(numFireBalls: Int = 2) =
     println("한 덩어리의 파이볼이 나타난다. (x$numFireBalls)")
-}
