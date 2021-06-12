@@ -7,8 +7,7 @@ var playerSilver = 10
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 
 fun main(args: Array<String>) {
-    placeOrder("shandy,Dragon's Breath,5.91")
-
+    //placeOrder("shandy,Dragon's Breath,5.91")
     printPatron()
 
     if (patronList.contains("Eli")) {
@@ -22,15 +21,6 @@ fun main(args: Array<String>) {
     } else {
         println("술집 주인이 말한다: 아니오, 나간 사람도 있습니다.")
     }
-
-    placeOrder("shandy,Dragon's Breath,5.91")
-
-    println(patronList)
-    patronList.remove("Eli")
-    patronList.add("Alex")
-    patronList.add(0, "Alex")
-    patronList[0] = "Alexis"
-    println(patronList)
 }
 
 private fun printPatron() {
@@ -41,6 +31,12 @@ private fun printPatron() {
     //println(patronList[4])
     println(patronList.getOrElse(4) { "Unknown Patron" })
     println(patronList.getOrNull(4) ?: "Unknown Patron")
+
+    patronList.forEach({ patron -> println("좋은 밤입니다, $patron 님") })
+    patronList.forEachIndexed { index, patron ->
+        println("좋은 밤입니다, $patron 님 - 당신 #${index + 1} 번째입니다.")
+        placeOrder(patron, "shandy,Dragon's Breath,5.91")
+    }
 }
 
 fun performPurchase(price: Double) {
@@ -75,21 +71,21 @@ private fun toDragonSpeak(phrase: String) =
         }
     }
 
-fun placeOrder(menuData: String) {
+fun placeOrder(patronName: String, menuData: String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
-    println("매드리갈은 $tavernMaster 에게 주문한다.")
+    println("${patronName} 은 $tavernMaster 에게 주문한다.")
 
     val (type, name, price) = menuData.split(",")
-    val message = "마드리갈은 금화 $price 로 $name ($type)를 구입한다."
+    val message = "${patronName}은 금화 $price 로 $name ($type)를 구입한다."
     println(message)
 
     performPurchase(price.toDouble())
 
     val phrase = if (name == "Dragon's Breath") {
-        "마드리갈이 감탄한다: ${toDragonSpeak("와, $name 진짜 좋구나.")}"
+        "${patronName}이 감탄한다: ${toDragonSpeak("와, $name 진짜 좋구나.")}"
     } else {
-        "마드리갈이 말한다: 감사합니다 $name"
+        "${patronName}이 말한다: 감사합니다 $name"
     }
     println(phrase)
 }
