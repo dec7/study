@@ -9,7 +9,11 @@ fun main(args: Array<String>) {
 
 fun performPurchase(price: Double) {
     displayBalance()
+    var totalPurse = playerGold + (playerSilver / 100.0)
+    println("지갑 전체 금액: 금화 $totalPurse")
     println("금화 $price 로 술을 구입함")
+
+    val remainingBalance = totalPurse - price
 }
 
 fun displayBalance() {
