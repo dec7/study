@@ -1,15 +1,18 @@
 const val TAVERN_NAME = "Taernyl's Folly"
+
+var playerGold = 10
+var playerSilver = 10
+
 fun main(args: Array<String>) {
-    //placeOrder("shandy,Dragon's Breath,5.91")
-    placeOrder("elixir,Shirley's Temple,4.12")
+    placeOrder("shandy,Dragon's Breath,5.91")
+}
 
-    val capitalA: Char = 'A'
-    val unicodeCapitalA: Char = '\u0041'
-    println("A: ${capitalA}, unicode A: ${unicodeCapitalA}")
+fun performPurchase() {
+    displayBalance()
+}
 
-    "Dragon's Breath".forEach {
-        println("$it\n")
-    }
+fun displayBalance() {
+    println("플레이어의 지갑 잔액: 금화: $playerGold 개, 은화: $playerSilver 개")
 }
 
 private fun toDragonSpeak(phrase: String) =
@@ -27,7 +30,14 @@ private fun toDragonSpeak(phrase: String) =
 fun placeOrder(menuData: String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
+    println("매드리갈은 $tavernMaster 에게 주문한다.")
+
     val (type, name, price) = menuData.split(",")
+    val message = "마드리갈은 금화 $price 로 $name ($type)를 구입한다."
+    println(message)
+
+    performPurchase()
+
     val phrase = if (name == "Dragon's Breath") {
         "마드리갈이 감탄한다: ${toDragonSpeak("와, $name 진짜 좋구나.")}"
     } else {
