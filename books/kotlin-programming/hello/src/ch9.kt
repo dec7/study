@@ -4,6 +4,26 @@ fun main(args: Array<String>) {
     applyFu()
     letFn()
     runFn()
+    withFn()
+    alsoFn()
+}
+
+fun alsoFn() {
+    var fileContents: List<String>
+    File("file.txt")
+        .also {
+            println(it.name)
+        }.also {
+            fileContents = it.readLines()
+        }
+    println(fileContents)
+}
+
+fun withFn() {
+    val nameTooLong = with("Polarcubis, Supreme of NyetHack") {
+        length >= 20
+    }
+    println(nameTooLong)
 }
 
 fun runFn() {
@@ -32,7 +52,7 @@ fun runFn() {
 }
 
 fun letFn() {
-    val firstItemSquared = listOf(1,2,3).last().let {
+    val firstItemSquared = listOf(1, 2, 3).last().let {
         it * it
     }
     println("letFn: ${firstItemSquared}")
