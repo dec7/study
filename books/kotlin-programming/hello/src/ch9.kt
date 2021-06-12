@@ -3,7 +3,32 @@ import java.io.File
 fun main(args: Array<String>) {
     applyFu()
     letFn()
+    runFn()
+}
 
+fun runFn() {
+    val menuFile = File("menu-file.txt")
+    val servesDragonsBreath = menuFile.run {
+        readText().contains("Dragon's Breath")
+    }
+
+    fun nameIsLong(name: String) = name.length >= 20
+    println("Result: ${"Madrigal".run(::nameIsLong)}")
+    println("Result: ${"Polarcubis, Supreme of NyetHack".run(::nameIsLong)}")
+
+    fun playerCreateMessage(nameTooLong: Boolean): String {
+        return if (nameTooLong) {
+            "Name is too long, Please choose another name."
+        } else {
+            "Welcome, adventurer"
+        }
+    }
+
+    "Polarcubis, Supreme of NyetHack"
+        .run(::nameIsLong)
+        .run(::playerCreateMessage)
+        .run(::println)
+    println(playerCreateMessage(nameIsLong("Polarcubis, Supreme of NyetHack")))
 }
 
 fun letFn() {
