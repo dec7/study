@@ -7,6 +7,14 @@ fun main(args: Array<String>) {
     withFn()
     alsoFn()
     takeIfFn()
+    takeUnlessFn()
+}
+
+fun takeUnlessFn() {
+    val fileContents = File("myfile.txt")
+        .takeUnless { it.isHidden }
+        ?.readText()
+    println(fileContents)
 }
 
 fun takeIfFn() {
