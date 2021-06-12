@@ -4,9 +4,22 @@ const val TAVERN_NAME = "Taernyl's Folly"
 
 var playerGold = 10
 var playerSilver = 10
+val patronList: List<String> = listOf("Eli", "Mordoc", "Sophie")
 
 fun main(args: Array<String>) {
     placeOrder("shandy,Dragon's Breath,5.91")
+
+    printPatron()
+}
+
+private fun printPatron() {
+    println(patronList)
+    println(patronList[0])
+    println(patronList.first())
+    println(patronList.last())
+    //println(patronList[4])
+    println(patronList.getOrElse(4) { "Unknown Patron" })
+    println(patronList.getOrNull(4) ?: "Unknown Patron")
 }
 
 fun performPurchase(price: Double) {
