@@ -1,3 +1,5 @@
+import kotlin.math.roundToInt
+
 const val TAVERN_NAME = "Taernyl's Folly"
 
 var playerGold = 10
@@ -14,6 +16,13 @@ fun performPurchase(price: Double) {
     println("금화 $price 로 술을 구입함")
 
     val remainingBalance = totalPurse - price
+    println("남은 잔액: ${"%.2f".format(remainingBalance)}")
+
+    val remainingGold = remainingBalance.toInt()
+    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
+    playerGold = remainingGold
+    playerSilver = remainingSilver
+    displayBalance()
 }
 
 fun displayBalance() {
