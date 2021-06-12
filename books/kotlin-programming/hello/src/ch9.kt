@@ -6,6 +6,14 @@ fun main(args: Array<String>) {
     runFn()
     withFn()
     alsoFn()
+    takeIfFn()
+}
+
+fun takeIfFn() {
+    val fileContents = File("myfile.txt")
+        .takeIf { it.canRead() && it.canWrite() }
+        ?.readText()
+        .run(::println)
 }
 
 fun alsoFn() {
