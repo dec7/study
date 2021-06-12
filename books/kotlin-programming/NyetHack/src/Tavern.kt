@@ -6,6 +6,10 @@ fun main(args: Array<String>) {
     val capitalA: Char = 'A'
     val unicodeCapitalA: Char = '\u0041'
     println("A: ${capitalA}, unicode A: ${unicodeCapitalA}")
+
+    "Dragon's Breath".forEach {
+        println("$it\n")
+    }
 }
 
 private fun toDragonSpeak(phrase: String) =
