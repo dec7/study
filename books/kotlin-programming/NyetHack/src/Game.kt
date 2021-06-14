@@ -4,12 +4,14 @@ fun main(args: Array<String>) {
     val isBlessed = true
     val isImmortal = false
 
+    val player = Player()
+    player.castFireball()
+
     val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
-    printPlayerStatus(auraColor, isBlessed, name, healthStatus)
+    printPlayerStatus(auraColor, isBlessed, player.name, healthStatus)
     val status = "Status"
     printPlayerStatus(auraColor = "NONE", isBlessed = true, name = "마드리갈", healthStatus = status)
-    castFireBall()
 
     val karma = (Math.pow(Math.random(), (110 - healthPoints) / 100.0) * 20).toInt()
     val karmaColor = when (karma) {
@@ -60,6 +62,3 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
         in 15..74 -> "많이 다친 것 같음"
         else -> "최악의 상태임!"
     }
-
-private fun castFireBall(numFireBalls: Int = 2) =
-    println("한 덩어리의 파이볼이 나타난다. (x$numFireBalls)")
