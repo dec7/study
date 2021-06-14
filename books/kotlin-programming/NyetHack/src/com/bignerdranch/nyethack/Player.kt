@@ -15,6 +15,7 @@ class Player(
         }
 
     val hometown by lazy { selectHometown() }
+    var currentPosition = Coordinate(0, 0)
 
     private fun selectHometown() = File("data/towns.txt")
         .readText()
