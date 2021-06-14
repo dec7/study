@@ -1,6 +1,10 @@
 package com.bignerdranch.nyethack
 
 fun main(args: Array<String>) {
+    val abandonedTownSquare = object : TownSquare() {
+        override fun load() = "환영받을 것을 예상했지만 여기는 아무도 없군요..."
+    }
+    println(abandonedTownSquare.load())
     Game.play()
 }
 
