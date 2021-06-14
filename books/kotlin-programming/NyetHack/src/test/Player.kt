@@ -5,8 +5,8 @@ class Player {
     private fun firstLetter() = name[0]
 
     init {
-        println(firstLetter())
         name = "Madrigal"
+        println(firstLetter())
     }
 }
 
