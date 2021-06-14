@@ -1,8 +1,8 @@
 package test
 
 class Player(_name: String) {
-    val playerName: String = initPlayerName()
     val name: String = _name
+    val playerName: String = initPlayerName()
 
     private fun initPlayerName() = name
 }
