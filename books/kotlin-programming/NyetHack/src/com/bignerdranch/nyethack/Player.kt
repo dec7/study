@@ -12,6 +12,14 @@ class Player(
             field = value.trim()
         }
 
+    constructor(name: String) : this(
+        name,
+        healthPoints = 100,
+        isBlessed = true,
+        isImmortal = false) {
+        if (name.toLowerCase() == "kar") healthPoints = 40
+    }
+
     fun castFireball(numFireballs: Int = 2) {
         println("한 덩이의 파이어볼이 나타난다. (x$numFireballs)")
     }
