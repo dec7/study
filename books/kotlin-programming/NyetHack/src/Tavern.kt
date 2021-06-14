@@ -11,8 +11,14 @@ val uniquePatrons = mutableSetOf<String>()
 var menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n")
+//val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
+//val patronGold = mapOf("Eli".to(10.5), "Mordoc".to(8.0), "Sophie".to(5.5))
+//val patronGold = mapOf(Pair("Eli", 10.5), Pair("Mordoc", 8.0), Pair("Sophe", 5.5))
+val patronGold = mutableMapOf("Eli" to 5.0, "Sophie" to 1.0)
 
 fun main(args: Array<String>) {
+//    patronGold += "Sophie" to 6.0
+//    println(patronGold)
 
     (0..9).forEach {
         val first = patronList.shuffled().first()
@@ -30,6 +36,7 @@ fun main(args: Array<String>) {
         )
         orderCount++
     }
+    println(patronGold)
 }
 
 private fun printPatron() {
