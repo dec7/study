@@ -36,3 +36,13 @@ private fun printPlayerStatus(player: Player) {
     println("${player.name} ${player.formatHealthStatus()}")
 }
 
+fun printIsSourceOfBlessings(any: Any) {
+    val isSourceOfBlessings = if (any is Player) {
+        any.isBlessed
+    } else {
+        (any as Room).name == "Fount of Blessings"
+    }
+
+    println("$any is a source of blessings: $isSourceOfBlessings")
+}
+
