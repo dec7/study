@@ -1,3 +1,5 @@
+package com.bignerdranch.nyethack
+
 fun main(args: Array<String>) {
     val name = "마드리갈"
     val healthPoints = 87

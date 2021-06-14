@@ -1,5 +1,6 @@
+package com.bignerdranch.nyethack
+
 import java.io.File
-import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
@@ -10,14 +11,14 @@ var menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n")
 val patronGold = mutableMapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
-//val patronGold = mapOf("Eli".to(10.5), "Mordoc".to(8.0), "Sophie".to(5.5))
-//val patronGold = mapOf(Pair("Eli", 10.5), Pair("Mordoc", 8.0), Pair("Sophe", 5.5))
-//val patronGold = mutableMapOf("Eli" to 5.0, "Sophie" to 1.0)
-//val patronGold = mutableMapOf<String, Double>()
+//val com.bignerdranch.nyethack.getPatronGold = mapOf("Eli".to(10.5), "Mordoc".to(8.0), "Sophie".to(5.5))
+//val com.bignerdranch.nyethack.getPatronGold = mapOf(Pair("Eli", 10.5), Pair("Mordoc", 8.0), Pair("Sophe", 5.5))
+//val com.bignerdranch.nyethack.getPatronGold = mutableMapOf("Eli" to 5.0, "Sophie" to 1.0)
+//val com.bignerdranch.nyethack.getPatronGold = mutableMapOf<String, Double>()
 
 fun main(args: Array<String>) {
-//    patronGold += "Sophie" to 6.0
-//    println(patronGold)
+//    com.bignerdranch.nyethack.getPatronGold += "Sophie" to 6.0
+//    println(com.bignerdranch.nyethack.getPatronGold)
 
     (0..9).forEach {
         val first = patronList.shuffled().first()
@@ -55,7 +56,7 @@ private fun printPatron() {
     println(patronList[0])
     println(patronList.first())
     println(patronList.last())
-    //println(patronList[4])
+    //println(com.bignerdranch.nyethack.getPatronList[4])
     println(patronList.getOrElse(4) { "Unknown Patron" })
     println(patronList.getOrNull(4) ?: "Unknown Patron")
 
