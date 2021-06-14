@@ -5,7 +5,7 @@ fun main(args: Array<String>) {
     val isImmortal = false
 
     val player = Player()
-    player.name = "estragon "
+    //player.name = "estragon "
     println(player.name + "TheBrave")
     player.castFireball()
 
