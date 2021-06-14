@@ -14,7 +14,8 @@ var menuList = File("data/tavern-menu-items.txt")
 //val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
 //val patronGold = mapOf("Eli".to(10.5), "Mordoc".to(8.0), "Sophie".to(5.5))
 //val patronGold = mapOf(Pair("Eli", 10.5), Pair("Mordoc", 8.0), Pair("Sophe", 5.5))
-val patronGold = mutableMapOf("Eli" to 5.0, "Sophie" to 1.0)
+//val patronGold = mutableMapOf("Eli" to 5.0, "Sophie" to 1.0)
+val patronGold = mutableMapOf<String, Double>()
 
 fun main(args: Array<String>) {
 //    patronGold += "Sophie" to 6.0
@@ -35,6 +36,11 @@ fun main(args: Array<String>) {
             menuList.shuffled().first()
         )
         orderCount++
+    }
+    println(patronGold)
+
+    uniquePatrons.forEach {
+        patronGold[it] = 6.0
     }
     println(patronGold)
 }
