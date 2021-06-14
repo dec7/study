@@ -1,15 +1,12 @@
 package test
 
-class Player {
-    val name: String
-    private fun firstLetter() = name[0]
+class Player(_name: String) {
+    val playerName: String = initPlayerName()
+    val name: String = _name
 
-    init {
-        name = "Madrigal"
-        println(firstLetter())
-    }
+    private fun initPlayerName() = name
 }
 
 fun main(args: Array<String>) {
-    val player = Player()
+    println(Player("Madrigal").playerName)
 }
