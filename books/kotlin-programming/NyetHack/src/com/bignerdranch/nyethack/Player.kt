@@ -1,15 +1,20 @@
 package com.bignerdranch.nyethack
 
-class Player {
-    var name = "madrigal"
+class Player(
+    _name: String,
+    _healthPoints: Int,
+    _isBlessed: Boolean,
+    _isImmortal: Boolean
+) {
+    var name = _name
         get() = field.capitalize()
         private set(value) {
             field = value.trim()
         }
 
-    var healthPoints = 87
-    val isBlessed = true
-    private val isImmortal = false
+    var healthPoints = _healthPoints
+    val isBlessed = _isBlessed
+    private val isImmortal = _isImmortal
 
     fun castFireball(numFireballs: Int = 2) {
         println("한 덩이의 파이어볼이 나타난다. (x$numFireballs)")
