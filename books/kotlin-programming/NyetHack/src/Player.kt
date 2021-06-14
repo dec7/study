@@ -1,6 +1,9 @@
 class Player {
-    val name = "madrigal"
+    var name = "madrigal"
         get() = field.capitalize()
+        set(value) {
+            field = value.trim()
+        }
 //    var healthPoints = 89
 
     fun castFireball(numFireballs: Int = 2) {
