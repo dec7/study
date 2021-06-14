@@ -13,6 +13,10 @@ fun main(args: Array<String>) {
     println(currentTownSquare.description())
     println(currentTownSquare.load())
 
+    var currentSucTownSquare = SubTownSquare()
+    println(currentSucTownSquare.description())
+    println(currentSucTownSquare.load())
+
     printPlayerStatus(player)
 
     val numLetters = "Mississippi".count()
