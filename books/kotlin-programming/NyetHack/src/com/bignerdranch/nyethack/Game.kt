@@ -5,7 +5,11 @@ fun main(args: Array<String>) {
         override fun load() = "환영받을 것을 예상했지만 여기는 아무도 없군요..."
     }
     println(abandonedTownSquare.load())
-    Game.play()
+
+    val (vExperience, vLevel) = PlayerScore(1250, 5)
+    println("vExperience: $vExperience, vLevel: $vLevel")
+
+    //Game.play()
 }
 
 object Game {
@@ -47,4 +51,9 @@ object Game {
 
         private fun commandNotFound() = "접합하지 않는 명령입니다."
     }
+}
+
+class PlayerScore(val experience: Int, val level: Int) {
+    operator fun component1() = experience
+    operator fun component2() = level
 }
