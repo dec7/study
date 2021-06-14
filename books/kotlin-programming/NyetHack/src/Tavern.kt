@@ -1,3 +1,4 @@
+import java.io.File
 import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
@@ -7,8 +8,12 @@ var playerSilver = 10
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val uniquePatrons = mutableSetOf<String>()
+var menuList = File("data/tavern-menu-items.txt")
+    .readText()
+    .split("\n")
 
 fun main(args: Array<String>) {
+
     (0..9).forEach {
         val first = patronList.shuffled().first()
         val last = lastName.shuffled().first()
@@ -16,6 +21,15 @@ fun main(args: Array<String>) {
         uniquePatrons += name
     }
     println(uniquePatrons)
+
+    var orderCount = 0
+    while (orderCount <= 9) {
+        placeOrder(
+            uniquePatrons.shuffled().first(),
+            menuList.shuffled().first()
+        )
+        orderCount++
+    }
 }
 
 private fun printPatron() {
