@@ -1,6 +1,8 @@
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+
 public class Jhava {
 
     private int hitPoints = 52489112;
@@ -30,6 +32,18 @@ public class Jhava {
 
     public void offerFood() {
         Hero.handOverFood("피자");
+    }
+
+    public void extendHandInFriendship() throws Exception {
+        throw new Exception();
+    }
+
+    public void apologize() {
+        try {
+            Hero.acceptApology();
+        } catch (IOException e) {
+            System.out.println("Caught!");
+        }
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,8 @@
 @file:JvmName("Hero")
+
+import java.io.IOException
+import kotlin.jvm.Throws
+
 fun main(args: Array<String>) {
     val adversary = Jhava()
     println(adversary.utterGreeting())
@@ -17,6 +21,12 @@ fun main(args: Array<String>) {
 
     val spellbook = Spellbook()
     spellbook.spells
+
+    try {
+        adversary.extendHandInFriendship()
+    } catch (e: Exception) {
+        println("잘가라, 못된 괴물아")
+    }
 }
 
 fun makeProclamation() = "안녕, 괴물아!!"
@@ -24,6 +34,11 @@ fun makeProclamation() = "안녕, 괴물아!!"
 @JvmOverloads
 fun handOverFood(leftHand: String = "딸기", rightHand: String = "고기") {
     println("맛있는 $leftHand 와 $rightHand 를 넘겨주었습니다.")
+}
+
+@Throws(IOException::class)
+fun acceptApology() {
+    throw IOException()
 }
 
 class Spellbook {
