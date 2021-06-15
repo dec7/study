@@ -1,5 +1,7 @@
 package com.bignerdranch.nyethack
 
+import kotlin.system.exitProcess
+
 fun main(args: Array<String>) {
     val abandonedTownSquare = object : TownSquare() {
         override fun load() = "환영받을 것을 예상했지만 여기는 아무도 없군요..."
@@ -57,16 +59,40 @@ object Game {
             "잘못된 방향임: $directionInput"
         }
 
+    private fun fight() = currentRoom.monster?.let {
+        while (player.healthPoints > 0 && it.healthPoints > 0) {
+            slay(it)
+            Thread.sleep(1000)
+        }
+        "전투가 끝났음"
+    } ?: "여기에는 싸울 괴물이 없습니다."
+
+    private fun slay(monster: Monster) {
+        println("${monster.name} -- ${monster.attack(player)} 손상을 입힘!")
+        println("${player.name} -- ${player.attack(monster)} 손상을 입힘!")
+
+        if (player.healthPoints <= 0) {
+            println(">>>> 당신은 졌습니다! 게임을 종료합니다.. <<<<")
+            exitProcess(0)
+        }
+
+        if (monster.healthPoints <= 0) {
+            println(">>>> ${monster.name} -- 격퇴됨 <<<<")
+            currentRoom.monster = null
+        }
+    }
+
     private class GameInput(arg: String?) {
         private val input = arg ?: ""
         val command = input.split(" ")[0]
         val argument = input.split(" ").getOrElse(1, { "" })
 
         fun processCommand() = when (command.toLowerCase()) {
+            "fight" -> fight()
             "move" -> move(argument)
             else -> commandNotFound()
         }
 
-        private fun commandNotFound() = "접합하지 않는 명령입니다."
+        private fun commandNotFound() = "적합하지 않는 명령입니다."
     }
 }
