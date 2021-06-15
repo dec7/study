@@ -38,7 +38,9 @@ public class Jhava {
         Spellbook spellbook = new Spellbook();
         System.out.println(spellbook.spells);
 
-        System.out.println("Max Spell count: " + Spellbook.Companion.getMAX_SPELL_COUNT());
+        System.out.println("Max Spell count: " + Spellbook.MAX_SPELL_COUNT);
+        Spellbook.Companion.getSpellbookGreeting();
+        Spellbook.getSpellbookGreeting();
     }
 
 }

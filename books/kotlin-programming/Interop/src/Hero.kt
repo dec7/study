@@ -31,6 +31,10 @@ class Spellbook {
     val spells = listOf("Magic Ms. L", "Lay on Hans")
 
     companion object {
+        @JvmField
         val MAX_SPELL_COUNT = 10
+
+        @JvmStatic
+        fun getSpellbookGreeting() = println("나는 위대한 그리모어다!")
     }
 }
