@@ -10,8 +10,13 @@ fun <T> T.easyPrint() : T {
     return this
 }
 
+infix fun String?.printWithDefault(default: String) = print(this ?: default)
+
 fun main(args: Array<String>) {
     "마드리갈이 그 건물에서 나왔습니다".easyPrint().addEnthusiasm().easyPrint()
     42.easyPrint()
     "How many vowels?".numVowels.easyPrint()
+
+    null printWithDefault "기본 문자열"
+    null.printWithDefault("기본 문자열")
 }
