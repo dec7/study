@@ -12,3 +12,5 @@ fun main(args: Array<String>) {
     adversary.greeting = "안녕하세요"
     println(adversary.utterGreeting())
 }
+
+fun makeProclamation() = "안녕, 괴물아!!"

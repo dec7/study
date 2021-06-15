@@ -27,4 +27,9 @@ public class Jhava {
     public int getHitPoints() {
         return hitPoints;
     }
+
+    public static void main(String[] args) {
+        System.out.println(HeroKt.makeProclamation());
+    }
+
 }
