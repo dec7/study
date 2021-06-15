@@ -20,8 +20,7 @@ class Player(
     private fun selectHometown() = File("data/towns.txt")
         .readText()
         .split("\n")
-        .shuffled()
-        .first()
+        .random()
 
     init {
         require(healthPoints > 0, { "healthPoints는 0보다 커야 합니다." })

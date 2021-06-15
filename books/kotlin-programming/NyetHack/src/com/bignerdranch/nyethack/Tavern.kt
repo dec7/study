@@ -16,8 +16,6 @@ val patronGold = mutableMapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
 //val com.bignerdranch.nyethack.getPatronGold = mutableMapOf("Eli" to 5.0, "Sophie" to 1.0)
 //val com.bignerdranch.nyethack.getPatronGold = mutableMapOf<String, Double>()
 
-private fun <T> Iterable<T>.random(): T = this.shuffled().first()
-
 fun main(args: Array<String>) {
 //    com.bignerdranch.nyethack.getPatronGold += "Sophie" to 6.0
 //    println(com.bignerdranch.nyethack.getPatronGold)
