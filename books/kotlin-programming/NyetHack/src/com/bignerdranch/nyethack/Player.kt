@@ -1,6 +1,7 @@
 package com.bignerdranch.nyethack
 
 import java.io.File
+import com.bignerdranch.nyethack.extensions.random as randomizer
 
 class Player(
     _name: String,
@@ -20,7 +21,7 @@ class Player(
     private fun selectHometown() = File("data/towns.txt")
         .readText()
         .split("\n")
-        .random()
+        .randomizer()
 
     init {
         require(healthPoints > 0, { "healthPoints는 0보다 커야 합니다." })
