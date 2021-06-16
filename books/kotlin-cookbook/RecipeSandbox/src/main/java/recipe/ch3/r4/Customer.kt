@@ -1,15 +1,7 @@
 package recipe.ch3.r4
 
 class Customer(val name: String) {
-    private var _messages: List<String>? = null
-
-    val messages: List<String>
-        get() {
-            if (_messages == null) {
-                _messages = loadMessages()
-            }
-            return _messages!!
-        }
+    val messages: List<String> by lazy { loadMessages() }
 
     private fun loadMessages(): MutableList<String> =
         mutableListOf(
