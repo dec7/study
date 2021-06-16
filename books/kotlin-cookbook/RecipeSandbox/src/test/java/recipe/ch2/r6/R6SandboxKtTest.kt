@@ -17,4 +17,10 @@ internal class R6SandboxKtTest {
         assertThat(256, equalTo(2.pow(8)))
         assertThat(256L, equalTo(2L.pow(8)))
     }
+
+    @Test
+    fun `raise as Int to a power as infix extension function`() {
+        assertThat(256, equalTo(2 `**` 8))
+        assertThat(256L, equalTo(2L `**` 8))
+    }
 }
