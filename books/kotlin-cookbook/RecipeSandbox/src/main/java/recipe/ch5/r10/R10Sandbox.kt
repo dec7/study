@@ -14,6 +14,8 @@ fun main(args: Array<String>) {
     for (player in team) {
         println(player)
     }
+
+    println(team.map { it.name }.joinToString())
 }
 
 data class Player(val name: String)
@@ -21,9 +23,9 @@ data class Player(val name: String)
 class Team(
     val name: String,
     val players: MutableList<Player> = mutableListOf()
-) {
+) : Iterable<Player> {
     fun addPlayers(vararg people: Player) =
         players.addAll(people)
-}
 
-operator fun Team.iterator() : Iterator<Player> = players.iterator()
+    override fun iterator(): Iterator<Player> = players.iterator()
+}
