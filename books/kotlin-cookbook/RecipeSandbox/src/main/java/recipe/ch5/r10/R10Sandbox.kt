@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
         Player("Cousins")
     )
 
-    for (player in team.players) {
+    for (player in team) {
         println(player)
     }
 }
@@ -25,3 +25,5 @@ class Team(
     fun addPlayers(vararg people: Player) =
         players.addAll(people)
 }
+
+operator fun Team.iterator() : Iterator<Player> = players.iterator()
