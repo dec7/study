@@ -1,0 +1,41 @@
+package recipe.ch3.r5
+
+import org.apache.commons.math3.complex.Complex
+import org.apache.commons.math3.complex.Complex.I
+import org.apache.commons.math3.complex.Complex.ONE
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.closeTo
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import java.lang.Math.PI
+
+internal class ComplexOverloadOperatorsKtTest {
+    private val first = Complex(1.0, 3.0)
+    private val second = Complex(2.0, 5.0)
+
+    @Test
+    internal fun plus() {
+        val sum = first + second
+        assertThat(sum, `is`(Complex(3.0, 8.0)))
+    }
+
+    @Test
+    internal fun minus() {
+        val diff = second - first
+        assertThat(diff, `is`(Complex(1.0, 2.0)))
+    }
+
+    @Test
+    internal fun negate() {
+        val minus1 = -ONE
+        assertThat(minus1.real, closeTo(-1.0, 0.000001))
+        assertThat(minus1.imaginary, closeTo(0.0, 0.000001))
+    }
+
+    @Test
+    internal fun `Euler's formula`() {
+        val iPI = I * PI
+        assertTrue(Complex.equals(iPI.exp(), -ONE, 0.00001))
+    }
+}
