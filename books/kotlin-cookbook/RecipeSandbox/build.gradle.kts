@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.apache.commons:commons-math3:3.6.1")
+    implementation("com.google.code.gson:gson:2.8.7")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.hamcrest:hamcrest:2.2")
