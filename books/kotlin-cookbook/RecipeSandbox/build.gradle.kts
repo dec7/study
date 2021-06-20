@@ -16,11 +16,12 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.code.gson:gson:2.8.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.hamcrest:hamcrest:2.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
     testImplementation(kotlin("test-junit5"))
 }
 
