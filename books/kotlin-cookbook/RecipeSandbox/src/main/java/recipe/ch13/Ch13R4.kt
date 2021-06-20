@@ -7,16 +7,13 @@ import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 
 fun main() = runBlocking {
-    val dispatcher = Executors.newFixedThreadPool(10)
-        .asCoroutineDispatcher()
-
-
-    (1..12).forEach {
-        withContext(dispatcher) {
-            delay(100L)
-            println("$it - ${Thread.currentThread().name}")
+    Executors.newFixedThreadPool(10)
+        .asCoroutineDispatcher().use {
+            (1..12).forEach { index ->
+                withContext(it) {
+                    delay(100L)
+                    println("$index - ${Thread.currentThread().name}")
+                }
+            }
         }
-    }
-
-    dispatcher.close()
 }
